@@ -95,9 +95,7 @@ handleData = (data) => {
       title: 'Aviso!',
       position: "fixed"
     });
-    setTimeout(() => {
-        window.location.reload();
-      }, 2000); 
+      this.props.history.push("/dashboardAdminAlfa")
     localStorage.removeItem("idRegistro")
   }
   

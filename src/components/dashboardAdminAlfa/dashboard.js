@@ -5,7 +5,11 @@ import { AppNavbarBrand } from '@coreui/react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import {
+	Grid,
+	Button,
+  } from '@material-ui/core';
+
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {MDBRow, MDBCol,MDBTable, MDBTableBody, MDBBtn } from 'mdbreact';
@@ -23,16 +27,31 @@ import {
   MDBContainer,
 
 } from "mdbreact";
-import "../Home/index.css";
+import { Form, Field } from 'react-final-form';
+import "../../index.css";
 import { DialogUtility } from '@syncfusion/ej2-popups';
 import axios from 'axios'
 import { API} from '../utils/http'
+import { TextField, Radio, Select } from 'final-form-material-ui';
 
+function onSubmit (values) {
+};
+
+const validate = values => {
+  const errors = {};
+  if (!values.register) {
+    errors.register = 'Este campo es requerido';
+  }
+
+
+  return errors;
+};
 class Das extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          AdminAlfa:[]
+          AdminAlfa:[],
+          register473:''
         }
       }
 componentWillMount(){
@@ -68,7 +87,7 @@ componentWillMount(){
 }  
 
 logOut(){
-  this.props.history.push("/loginAlfa")
+  this.props.history.push("/")
    localStorage.removeItem("idAdminAlfa")
   localStorage.removeItem("elToken")
   DialogUtility.alert({
@@ -78,11 +97,62 @@ logOut(){
     position: "fixed"
   });
 }
+register473(values){
+
+if(values.register == 'administrador*alfa'){
+  this.props.history.push("/register473")
+}else{
+  DialogUtility.alert({
+    animationSettings: { effect: 'Fade' },           
+    title:'Aviso',
+    content: 'Clave incorrecta',
+    position: "fixed",
+  
+  }
+  )
+  window.location.reload()
+}
+}
 registrar(){
   this.props.history.push("/paquetes") 
 }
 
   render() {
+   let register473;
+    if(this.state.register473=='1'){
+      register473 =  <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
+      <Form
+        onSubmit={onSubmit}
+        
+        validate={validate}
+        render={({ handleSubmit, submitting,values }) => (
+          <form onSubmit={handleSubmit}>
+          
+                  <Field
+                    fullWidth
+                    required
+                    name="register"
+                    component={TextField}
+                    type="password"
+                    label="clave"
+                    style={{marginBottom:10}}
+                  />
+                <Grid container alignItems="flex-start">
+                  <Button
+                   variant="outlined"
+                    color="primary"
+                    type="submit"
+                    disabled={submitting}
+                    onClick={(e) =>this.register473(values)}
+                  >
+                   Aceptar
+                  </Button>
+                  </Grid>
+          </form>
+        )}
+      />
+    </div>
+    }
     const container = { marginLeft:20}
     const overlay = (
       <div
@@ -92,7 +162,7 @@ registrar(){
       />
     );
     return (
-      
+     
 
         <React.Fragment>
             <div id="apppage">
@@ -130,6 +200,7 @@ registrar(){
                   Vista General 
                 </Typography>
               
+              
               </CardContent>
             </CardActionArea>
           <MDBContainer > <Alert className ="mt-4" color ="primary ">Movimientos Realizados por {this.state.AdminAlfa.nombreAdmin}</Alert>
@@ -153,6 +224,13 @@ registrar(){
                   Salir
                   </Button> 
                   </MDBCol>
+                  <MDBCol>                  
+                  <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => this.setState({register473:'1'}) }>
+                    Register 473
+                  </Button>
+                  {register473}
+                  </MDBCol>
+                  
                   </MDBRow>
         </div>
         <br/>
@@ -162,10 +240,11 @@ registrar(){
                   margin="2cm"
                   ref={(component) => this.pdfExportComponent = component}
               >
-        <font face="arial" className = "mt-4 ml-3" >  <img ref={(image) => this.image = image} src="http://www.ads.com.mx/_Media/logotipo_ads_png_med.png" width="100px"
-              /></font>
+        
 
         <MDBContainer style={container}>
+        <font face="arial"  >  <img style={{marginLeft:20}} ref={(image) => this.image = image} src="http://www.ads.com.mx/_Media/logotipo_ads_png_med.png" width="100px"
+              /></font>
          <Paper>
         <MDBTable component={Paper}  small borderless className="text-left mt-4 ">
 

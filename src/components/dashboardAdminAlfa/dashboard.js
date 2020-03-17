@@ -110,7 +110,7 @@ if(values.register == 'administrador*alfa'){
   
   }
   )
-  window.location.reload()
+this.props.history.push("/dashboardAdminAlfa")
 }
 }
 registrar(){

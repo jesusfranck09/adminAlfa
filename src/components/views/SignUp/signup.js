@@ -23,6 +23,7 @@ import {MDBIcon} from 'mdbreact'
         $idAdminAlfa:String,
         $fecha:String,
         $paquete:String
+        $correoAdminAlfa:String
         ){
             signup(data: {
               first_name: $first_name
@@ -36,6 +37,7 @@ import {MDBIcon} from 'mdbreact'
                 idAdminAlfa:$idAdminAlfa
                 fecha:$fecha
                 paquete:$paquete
+                correoAdminAlfa:$correoAdminAlfa
             }){
              
                 message
@@ -76,6 +78,7 @@ handleForm = (e, signup) => {
 
   e.preventDefault();
   const paquete  = localStorage.getItem("paquete")
+  const correoAdminAlfa  = localStorage.getItem("correoAdminAlfa")
   const idAdminAlfa = localStorage.getItem("idAdminAlfa")
   const id = localStorage.getItem("idRegistro")
   var date= new Date()
@@ -86,7 +89,8 @@ handleForm = (e, signup) => {
          id,
          idAdminAlfa,
          fecha,
-         paquete
+         paquete,
+         correoAdminAlfa
   }});
 }
 

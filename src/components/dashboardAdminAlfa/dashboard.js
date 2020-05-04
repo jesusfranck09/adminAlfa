@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import logo from '../images/logotipo.png'
+import logo from '../images/diagnostico.png'
 import { AppNavbarBrand } from '@coreui/react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Card from '@material-ui/core/Card';
@@ -73,13 +73,14 @@ componentWillMount(){
           empleados
           RazonSocial
           RFC
+          telefono
             }
         }
         `
     }
 })
-.then(datos => {	
-  console.log("datos" , datos.data.data.getAdminAlfa[0])
+.then(datos => {	 
+  console.log("datos adminAlfa" , datos.data.data.getAdminAlfa)
   this.setState({AdminAlfa: datos.data.data.getAdminAlfa})
 }).catch(err=>{
     console.log("este es el error" , err.response)
@@ -90,6 +91,9 @@ logOut(){
   this.props.history.push("/")
    localStorage.removeItem("idAdminAlfa")
   localStorage.removeItem("elToken")
+  localStorage.removeItem("correoAdminAlfa")
+
+  
   DialogUtility.alert({
     animationSettings: { effect: 'Zoom' },           
     content: "Hasta Luego!",
@@ -118,11 +122,11 @@ registrar(){
 }
 
   render() {
-    const columns = ["Administrador","Correo","Paquete Empleados", "Empresas",  "Vendido a","RFC","Fecha de Venta"];
+    const columns = ["Administrador","Paquete Empleados", "Empresas",  "Vendido a","RFC","Telefono","Fecha de Venta"];
 
     const data = this.state.AdminAlfa.map(rows=>{
       console.log("rows", rows)
-      return([ rows.nombreAdmin + " " + rows.apellidosAdmin ,rows.correo,rows.empleados ,rows.empresas ,rows.RazonSocial,rows.RFC,rows.fechaVenta])
+      return([ rows.nombreAdmin + " " + rows.apellidosAdmin ,rows.empleados ,rows.empresas ,rows.RazonSocial,rows.RFC,rows.telefono,rows.fechaVenta])
     })
     let datosEmpleados;
     let filtro;
@@ -269,11 +273,7 @@ registrar(){
         <React.Fragment>
         <section className="flex-column"  >
         <div>     <MDBRow>
-                  <MDBCol> 
-                  <Button outline startIcon={<VerticalAlignBottomOutlinedIcon />} color="success" className="k-button" onClick={() => { this.pdfExportComponent.save(); }}>
-                      Descargar Movimientos
-                  </Button>
-                  </MDBCol> 
+                  
                   <MDBCol>  
                   <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea Registrar?')) this.registrar()} }>
                   Registrar Paquetes
@@ -295,12 +295,7 @@ registrar(){
                   </MDBRow>
         </div>
         <br/>
-        <PDFExport
-                  scale={0.7}
-                  paperSize="A4"
-                  margin="2cm"
-                  ref={(component) => this.pdfExportComponent = component}
-              >
+
         
 
         <MDBContainer>
@@ -313,10 +308,7 @@ registrar(){
                 
               />
         </Paper> 
-        </MDBContainer>
-        
-       
-         </PDFExport>
+        </MDBContainer>        
         </section>
       </React.Fragment>
 

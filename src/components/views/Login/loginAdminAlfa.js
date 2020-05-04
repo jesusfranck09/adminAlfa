@@ -38,6 +38,7 @@ const LOGIN = gql`
           id
           message 
           token    
+          correo
         }
     }
 `
@@ -111,12 +112,13 @@ handleInput = (e) => {
     window.location.reload();
   }, 2000); 
   }
-      console.log("esta es la data",data)
-
+     
 
       if(data.loginAdminAlfa.message=='Login exitoso'){
+       
       localStorage.setItem('elToken', data.loginAdminAlfa.token)  
       localStorage.setItem('idAdminAlfa', data.loginAdminAlfa.id) 
+      localStorage.setItem('correoAdminAlfa', data.loginAdminAlfa.correo) 
       DialogUtility.alert({
         animationSettings: { effect: 'Zoom' },           
         title: 'Sesión iniciada exitosamente!',

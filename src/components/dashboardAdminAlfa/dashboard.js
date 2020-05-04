@@ -9,7 +9,6 @@ import {
 	Grid,
 	Button,
   } from '@material-ui/core';
-
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {MDBRow, MDBCol,MDBTable, MDBTableBody, MDBBtn } from 'mdbreact';
@@ -27,6 +26,7 @@ import {
   MDBContainer,
 
 } from "mdbreact";
+import MUIDataTable from "mui-datatables";
 import { Form, Field } from 'react-final-form';
 import "../../index.css";
 import { DialogUtility } from '@syncfusion/ej2-popups';
@@ -118,6 +118,63 @@ registrar(){
 }
 
   render() {
+    const columns = ["Administrador","Correo","Paquete Empleados", "Empresas",  "Vendido a","RFC","Fecha de Venta"];
+
+    const data = this.state.AdminAlfa.map(rows=>{
+      console.log("rows", rows)
+      return([ rows.nombreAdmin + " " + rows.apellidosAdmin ,rows.correo,rows.empleados ,rows.empresas ,rows.RazonSocial,rows.RFC,rows.fechaVenta])
+    })
+    let datosEmpleados;
+    let filtro;
+    const options = {
+        filterType: "dropdown",
+        responsive: "stacked",
+        textLabels: {
+                   body: {
+                     noMatch: "Lo Siento ,No se han encontrado Resultados :(",
+                     toolTip: "Sort",
+                     columnHeaderTooltip: column => `Sort for ${column.label}`
+                   },
+                   pagination: {
+                     next: "Siguiente Página",
+                     previous: "Anterior Página",
+                     rowsPerPage: "Filas por Página:",
+                     displayRows: "de",
+                   },
+                   toolbar: {
+                     search: "Buscar",
+                     downloadCsv: "Descargar CSV",
+                     print: "Imprimir",
+                     viewColumns: "Ver Columnas",
+                     filterTable: "Filtrar Tabla",
+                   },
+                   filter: {
+                     all: "Todos",
+                     title: "Filtros",
+                     reset: "Deshacer",
+                   },
+                   viewColumns: {
+                     title: "Mostrar Columnas",
+                     titleAria: "Show/Hide Table Columns",
+                   },
+                   selectedRows: {
+                     text: "Filas Selecionadas",
+                     delete: "Borrar",
+                     deleteAria: "Eliminar Filas Seleccionadas",
+                   },
+                 },
+      
+        onTableChange: (action, tableState) => {
+        datosEmpleados = tableState.displayData
+        console.log("datosEmpleados " , datosEmpleados)
+        },
+        onFilterChange: (action, filtroTable) => {
+          filtro=filtroTable
+          console.log("filtro" , filtro) 
+          }     };
+
+
+
    let register473;
     if(this.state.register473=='1'){
       register473 =  <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
@@ -147,13 +204,16 @@ registrar(){
                   >
                    Aceptar
                   </Button>
+                  <Button  startIcon={<CloseOutlinedIcon />} color="secondary" onClick={(e) => this.setState({register473:''}) }>
+                    Cerrar
+                  </Button>
                   </Grid>
           </form>
         )}
       />
     </div>
     }
-    const container = { marginLeft:20}
+
     const overlay = (
       <div
         id="sidenav-overlay"
@@ -226,8 +286,9 @@ registrar(){
                   </MDBCol>
                   <MDBCol>                  
                   <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => this.setState({register473:'1'}) }>
-                    Register 473
+                    Registrar Administradores Alfa
                   </Button>
+   
                   {register473}
                   </MDBCol>
                   
@@ -242,60 +303,15 @@ registrar(){
               >
         
 
-        <MDBContainer style={container}>
-        <font face="arial"  >  <img style={{marginLeft:20}} ref={(image) => this.image = image} src="http://www.ads.com.mx/_Media/logotipo_ads_png_med.png" width="100px"
-              /></font>
-         <Paper>
-        <MDBTable component={Paper}  small borderless className="text-left mt-4 ">
-
-        
-          {this.state.AdminAlfa.map(rows=>{
-            return(
-              
-              <MDBTableBody>                  
-                        <tr>
-                        <td>  
-                        </td>
-                        <td ></td>
-                        <td ></td>
-                      </tr>
-                      <tr>
-                      <td></td>
-                      <td ></td>
-                      <td ></td>
-                      </tr>
-                      <tr>
-                      <td ><strong>Administrador : {rows.nombreAdmin} {rows.apellidosAdmin} </strong> </td><strong>Correo :{rows.correo} </strong><td></td>
-                      <td ></td>
-                      <td ></td>
-                      </tr>
-
-
-                      <tr>
-                      <td ><strong>Paquete Empleados : {rows.empleados}</strong></td>
-                      <td ><strong> Empresas :  {rows.empresas}</strong></td>
-                      <td ></td>
-                      </tr>
-                      <tr>
-                      <td ><strong>Vendido a : {rows.RazonSocial}</strong></td>
-                      <td > <strong>RFC :  {rows.RFC}</strong></td>
-                      <td ></td>
-                      </tr>
-                      <tr>
-                      <td ><strong>Fecha de Venta : {rows.fechaVenta}</strong></td>
-                      <td ></td>
-                      <td ></td>
-            
-                      </tr>
-              </MDBTableBody>
-     
-            
-            )
-
-          })}               
-
-  
-        </MDBTable>
+        <MDBContainer>
+         <Paper style={{marginBottom:60}}>
+         <MUIDataTable
+                title={`Tabla de Movimientos`}
+                data={data}
+                columns={columns}
+                options={options}
+                
+              />
         </Paper> 
         </MDBContainer>
         

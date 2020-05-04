@@ -16,6 +16,7 @@ import {MDBIcon} from 'mdbreact'
         $last_name:String,
         $rfc:String,
         $razon_social:String,
+        $telefono:String,
         $email:String,
         $password:String, 
         $id:String,
@@ -28,6 +29,7 @@ import {MDBIcon} from 'mdbreact'
               last_name: $last_name
                 rfc:$rfc
                 razon_social:$razon_social
+                telefono: $telefono
                 email: $email
                 password: $password
                 id:$id
@@ -50,9 +52,10 @@ class Registro extends Component {
     lastName:'',
     rfc:'',
     razonSocial:'',
-    nombreUsuario:'',
+    telefono:'',
     email:'',
-    password:''
+    password:'',
+    
     
 }
 
@@ -127,6 +130,9 @@ handleData = (data) => {
       <Mutation mutation={SIGNUP}>
       {
         (signup, {data, error, loading}) => {
+          if(error){
+            console.log("error" , error.response)
+          }
          if (loading) console.log(loading);
         if (data){
           console.log("hay datos en el formulario" , data)
@@ -176,7 +182,16 @@ handleData = (data) => {
                         </InputGroupAddon>
                         <Input id="razon_social" onChange={this.handleInput} type="text"  placeholder="Razón Social" 
                         />
-                      </InputGroup>      
+                      </InputGroup>    
+                      <InputGroup className="mb-3">
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                          <MDBIcon icon="phone-alt" />
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Input id="telefono" onChange={this.handleInput} type="number"  placeholder="Teléfono" 
+                        />
+                      </InputGroup>    
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>

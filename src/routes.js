@@ -11,8 +11,10 @@ import {
 } from 'react-router-dom';
 import React, { Component } from 'react';
 
-import SignUp from './components/views/SignUp/signup';
- import Paquetes from './components/packComercial/packComercial';
+// import SignUp from './components/views/SignUp/signup';
+//  import Paquetes from './components/packComercial/packComercial';
+ import Paquetes from './components/packComercial/paquetes';
+ import RegistroSuperUser from './components/views/SignUp/registroSuperUser';
  import Login from './components/views/Login/loginAdminAlfa';
  import SignAlfa from './components/views/SignUp/signUpAdminAlfa';
  import DashboardAdminAlfa from './components/dashboardAdminAlfa/dashboard';
@@ -30,11 +32,14 @@ class Routes extends Component{
           <Switch>
               <main>
                  
+                  {/* <PrivateRoute exact path='/paquetes' component={Paquetes}/> */}
+                  <PrivateRoute exact path='/registro' component={RegistroSuperUser}/>
                   <PrivateRoute exact path='/paquetes' component={Paquetes}/>
+
                   <Route exact path='/' component={Login}/>
                   <PrivateRoute exact path='/register473' component={SignAlfa}/>
                   {/* <Route exact path='/verify/:id' component={Verify}/> */}
-                  <PrivateRoute exact path='/signup' component={SignUp}/>
+                  {/* <PrivateRoute exact path='/signup' component={SignUp}/> */}
                   {/* <PrivateRoute exact path='/result' component={Result}/> */}
                   <PrivateRoute exact path='/dashboardAdminAlfa' component={DashboardAdminAlfa}/>
 

@@ -70,13 +70,11 @@ import { DialogUtility } from '@syncfusion/ej2-popups';
 
           const Nombre = values.Nombre
           const Apellidos = values.Apellidos
-          const rfc = values.rfc  
-          const RazonSocial = values.RazonSocial
+          const rfc = values.rfc.replace(/,/g, "");  
+          const RazonSocial = values.RazonSocial.replace(/,/g, "");
           const telefono = values.telefono  
           const correo = values.correo
           const contraseña =  values.contraseña
-  
-        
 
           const paquete  = localStorage.getItem("paquete")
           const correoAdminAlfa  = localStorage.getItem("correoAdminAlfa")
@@ -118,7 +116,7 @@ import { DialogUtility } from '@syncfusion/ej2-popups';
                       position: "fixed"
                     });
                     localStorage.removeItem("idRegistro")
-                    this.props.history.push('/dashboardAdminAlfa');
+                    // this.props.history.push('/dashboardAdminAlfa');
                   } 
               }).catch(err=>{
                   console.log("error" , err.response)

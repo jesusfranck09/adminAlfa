@@ -50,7 +50,8 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-        
+            isPasswordShown: false
+
         }
       }
 componentWillMount(){
@@ -78,6 +79,12 @@ handleInput = (e) => {
     });
   }
 
+  togglePasswordVisiblity = () => {
+    const { isPasswordShown } = this.state;
+    this.setState({ isPasswordShown: !isPasswordShown });
+  };
+
+
   handleForm = (e, login) => { 
     e.preventDefault();
 
@@ -86,6 +93,7 @@ handleInput = (e) => {
         ...this.state
     }});
   }
+  
   
   handleData = (data) => {
 
@@ -129,6 +137,8 @@ handleInput = (e) => {
   }
   }
   render() {
+    const { isPasswordShown } = this.state;
+
     const overlay = (
       <div
         id="sidenav-overlay"
@@ -178,20 +188,7 @@ handleInput = (e) => {
                       <MDBNavLink to="#!">Profile</MDBNavLink>
                     </MDBNavItem>
                   </MDBNavbarNav>
-                  {/* <MDBNavbarNav right>
-                    <MDBNavItem>
-                      <MDBFormInline waves>
-                        <div className="md-form my-0">
-                          <input
-                            className="form-control mr-sm-2"
-                            type="text"
-                            placeholder="Search"
-                            aria-label="Search"
-                          />
-                        </div>
-                      </MDBFormInline>
-                    </MDBNavItem>
-                  </MDBNavbarNav> */}
+        
                 </MDBCollapse>
               </MDBContainer>
             </MDBNavbar>
@@ -233,7 +230,11 @@ handleInput = (e) => {
                           <MDBIcon icon="lock" />
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input id="password" onChange={this.handleInput} type="password" placeholder="Contraseña"/>
+                        <Input id="password" onChange={this.handleInput} type={isPasswordShown ? "text" : "password"} placeholder="Contraseña"/>
+                        <i
+                          className="fa fa-eye password-icon"
+                          onClick={this.togglePasswordVisiblity}
+                        />
                       </InputGroup>                           
                       <MDBRow>
                         <MDBCol md="8">

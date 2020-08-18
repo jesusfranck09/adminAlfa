@@ -215,8 +215,7 @@ import { DialogUtility } from '@syncfusion/ej2-popups';
                                 component={TextField}
                                 label="Contraseña"
                                 type = "password"
-                              />     
-                                                
+                              />                  
                             </Grid>
                             
                             <Grid item style={{ marginTop: 16 ,marginLeft:200 }}>

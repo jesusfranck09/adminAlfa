@@ -231,10 +231,12 @@ handleInput = (e) => {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input id="password" onChange={this.handleInput} type={isPasswordShown ? "text" : "password"} placeholder="Contraseña"/>
+                        <InputGroupText>
                         <i
                           className="fa fa-eye password-icon"
                           onClick={this.togglePasswordVisiblity}
                         />
+                        </InputGroupText>
                       </InputGroup>                           
                       <MDBRow>
                         <MDBCol md="8">

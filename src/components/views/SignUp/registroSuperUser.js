@@ -116,7 +116,7 @@ import { DialogUtility } from '@syncfusion/ej2-popups';
                       position: "fixed"
                     });
                     localStorage.removeItem("idRegistro")
-                    // this.props.history.push('/dashboardAdminAlfa');
+                    this.props.history.push('/dashboardAdminAlfa');
                   } 
               }).catch(err=>{
                   console.log("error" , err.response)

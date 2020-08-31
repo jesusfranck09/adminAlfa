@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { InputGroup, InputGroupAddon, InputGroupText,Input } from 'reactstrap';
 import logo from '../../images/logotipo.png'
 import diagnostico from '../../images/diagnostico.png'
+import "mdbreact/dist/css/mdb.css";
 
 import { AppNavbarBrand } from '@coreui/react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -25,7 +26,8 @@ import {
   MDBCardBody,
   MDBIcon,
   MDBNavItem,
-  MDBNavLink
+  MDBNavLink,
+  MDBCardHeader
 } from "mdbreact";
 import "./index.css";
 import { Mutation } from 'react-apollo';
@@ -210,10 +212,9 @@ handleInput = (e) => {
                 <MDBCol md="6" className="mb-8">
                   <MDBAnimation type="fadeInRight" delay=".3s">
                     <MDBCard id="classic-card"  >
+                      <MDBCardHeader ><h5 className="text-center"><i>Ingresar a Paquetes : </i></h5></MDBCardHeader>
                       <MDBCardBody className="white-text">
-                        <h3 className="text-center">
-                              Ingresar a Paquetes : 
-                        </h3>
+                     
                         <hr className="hr-light" />
 
                         <InputGroup   className="mb-3">
@@ -240,7 +241,7 @@ handleInput = (e) => {
                       </InputGroup>                           
                       <MDBRow>
                         <MDBCol md="8">
-                          <MDBBtn  color="success" className="px-4" type='submit'>Entrar</MDBBtn>
+                          <MDBBtn  style={{marginLeft:"60%"}} color="purple" className="px-4" type='submit'>Entrar</MDBBtn>
                         </MDBCol>
                       </MDBRow>
                     

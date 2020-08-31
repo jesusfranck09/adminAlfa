@@ -135,7 +135,7 @@ handleData = (data) => {
                           <MDBIcon icon="male"/>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input id="first_name" onChange={this.handleInput} type="text"  placeholder="Nombre/Representante" />
+                        <Input id="first_name" onChange={this.handleInput} type="text"  placeholder="Nombre" />
                       </InputGroup>
 
 

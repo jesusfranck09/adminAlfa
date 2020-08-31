@@ -14,7 +14,9 @@ import React, { Component } from 'react';
 // import SignUp from './components/views/SignUp/signup';
 //  import Paquetes from './components/packComercial/packComercial';
  import Paquetes from './components/packComercial/paquetes';
- import RegistroSuperUser from './components/views/SignUp/registroSuperUser';
+ import Facturacion from './components/dashboardAdminAlfa/facturacion';
+ import FacturacionRealizada from './components/dashboardAdminAlfa/facturacionRealizada';
+
  import Login from './components/views/Login/loginAdminAlfa';
  import SignAlfa from './components/views/SignUp/signUpAdminAlfa';
  import DashboardAdminAlfa from './components/dashboardAdminAlfa/dashboard';
@@ -33,7 +35,9 @@ class Routes extends Component{
               <main>
                  
                   {/* <PrivateRoute exact path='/paquetes' component={Paquetes}/> */}
-                  <PrivateRoute exact path='/registro' component={RegistroSuperUser}/>
+                  <PrivateRoute exact path='/facturacion' component={Facturacion}/>
+                  <PrivateRoute exact path='/facturacionRealizada' component={FacturacionRealizada}/>
+
                   <PrivateRoute exact path='/paquetes' component={Paquetes}/>
 
                   <Route exact path='/' component={Login}/>

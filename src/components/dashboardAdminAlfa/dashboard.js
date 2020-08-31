@@ -117,6 +117,12 @@ if(values.register == 'administrador*alfa'){
 this.props.history.push("/dashboardAdminAlfa")
 }
 }
+facturacion(){
+  this.props.history.push("/facturacion")
+}
+facturacionRealizada(){
+  this.props.history.push("/facturacionRealizada")
+}
 registrar(){
   this.props.history.push("/paquetes") 
 }
@@ -217,45 +223,10 @@ registrar(){
       />
     </div>
     }
-
-    const overlay = (
-      <div
-        id="sidenav-overlay"
-        style={{ backgroundColor: "transparent" }}
-        onClick={this.handleTogglerClick}
-      />
-    );
     return (
-     
-
         <React.Fragment>
-            <div id="apppage">
-        <Router>
-          <div>
-            <MDBNavbar
-              color="primary-color"
-              dark
-              expand="md"
-              fixed="top"
-              scrolling
-              transparent
-            >
-              <MDBContainer>
-                <MDBNavbarBrand>
-                <AppNavbarBrand
-                  full={{ src: logo, width: 89, height: 25, alt: 'ADS' }} />
-                  <strong className="white-text">Bienvenido</strong>
-                </MDBNavbarBrand>
-
-              </MDBContainer>
-            </MDBNavbar>
-            {this.state.collapsed && overlay}
-          </div>
-        </Router>
-        
-        <MDBView>
-          <MDBMask className="d-flex justify-content-center align-items-center gradient">
-            <MDBContainer style={{marginTop:60}}>
+      
+            <MDBContainer style={{marginTop:20,marginBottom:60}}>
             <Card >
             <CardActionArea>
        
@@ -263,20 +234,33 @@ registrar(){
                 <Typography gutterBottom variant="h5" component="h2">
                   Vista General 
                 </Typography>
-              
-              
               </CardContent>
             </CardActionArea>
           <MDBContainer > <Alert className ="mt-4" color ="primary ">Movimientos Realizados por {this.state.AdminAlfa.nombreAdmin}</Alert>
 
-       
-        <React.Fragment>
         <section className="flex-column"  >
         <div>     <MDBRow>
                   
                   <MDBCol>  
-                  <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea Registrar?')) this.registrar()} }>
+                  <Button style={{marginLeft:"10%"}}  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea Registrar?')) this.registrar()} }>
                   Registrar Paquetes
+                  </Button>
+                  </MDBCol>
+                  <MDBCol>                  
+                  <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => this.setState({register473:'1'}) }>
+                    Registrar Admin. Alfa
+                  </Button>
+   
+                  {register473}
+                  </MDBCol>
+                  <MDBCol>  
+                  <Button style={{marginLeft:"10%"}}  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacion()} }>
+                    N.o Facturación Pendiente
+                  </Button>
+                  </MDBCol>
+                  <MDBCol>  
+                  <Button style={{marginLeft:"10%"}}  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacionRealizada()} }>
+                    Sistemas vendidos por web
                   </Button>
                   </MDBCol>
                   <MDBCol>
@@ -284,13 +268,7 @@ registrar(){
                   Salir
                   </Button> 
                   </MDBCol>
-                  <MDBCol>                  
-                  <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => this.setState({register473:'1'}) }>
-                    Registrar Administradores Alfa
-                  </Button>
-   
-                  {register473}
-                  </MDBCol>
+                 
                   
                   </MDBRow>
         </div>
@@ -298,8 +276,8 @@ registrar(){
 
         
 
-        <MDBContainer>
-         <Paper style={{marginBottom:60}}>
+        <MDBContainer style={{padding:20}}>
+         <Paper>
          <MUIDataTable
                 title={`Tabla de Movimientos`}
                 data={data}
@@ -310,14 +288,10 @@ registrar(){
         </Paper> 
         </MDBContainer>        
         </section>
-      </React.Fragment>
-
-      </MDBContainer>
+         </MDBContainer>
           </Card>
             </MDBContainer>
-          </MDBMask>
-        </MDBView>
-      </div>
+
     </React.Fragment>
     
     );

@@ -241,7 +241,7 @@ handleInput = (e) => {
                       </InputGroup>                           
                       <MDBRow>
                         <MDBCol md="8">
-                          <MDBBtn  style={{marginLeft:"60%"}} color="purple" className="px-4" type='submit'>Entrar</MDBBtn>
+                          <MDBBtn  gradient="aqua"size="lg" className="px-4" type='submit'>Entrar</MDBBtn>
                         </MDBCol>
                       </MDBRow>
                     

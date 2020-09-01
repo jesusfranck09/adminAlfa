@@ -172,7 +172,7 @@ class Comprar extends Component {
         var razonS = this.state.razonS.toUpperCase();
         var telefono = this.state.telefono.toUpperCase();
         var correo = this.state.correo.toUpperCase();
-        var contraseña = this.state.contraseña.toUpperCase();
+        var contraseña = this.state.contraseña;
         var idAdminAlfa = localStorage.getItem("idAdminAlfa")
         var date= new Date()
         var fecha = date.toLocaleString('es')

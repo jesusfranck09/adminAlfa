@@ -20,6 +20,8 @@ import React, { Component } from 'react';
  import Login from './components/views/Login/loginAdminAlfa';
  import SignAlfa from './components/views/SignUp/signUpAdminAlfa';
  import DashboardAdminAlfa from './components/dashboardAdminAlfa/dashboard';
+ import Renovacion from './components/dashboardAdminAlfa/renovacion';
+
 class Routes extends Component{
   
   render(){
@@ -46,8 +48,8 @@ class Routes extends Component{
                   {/* <PrivateRoute exact path='/signup' component={SignUp}/> */}
                   {/* <PrivateRoute exact path='/result' component={Result}/> */}
                   <PrivateRoute exact path='/dashboardAdminAlfa' component={DashboardAdminAlfa}/>
+                  <PrivateRoute exact path='/renovacion' component={Renovacion}/>
 
-                 
               </main>
               </Switch>
           </Router>

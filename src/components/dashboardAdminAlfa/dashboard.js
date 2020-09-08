@@ -19,11 +19,12 @@ import { PDFExport } from '@progress/kendo-react-pdf';
 import VerticalAlignBottomOutlinedIcon from '@material-ui/icons/VerticalAlignBottomOutlined';
 import {Alert} from 'reactstrap'
 import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBMask,
-  MDBView,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
   MDBContainer,
+  MDBBtnGroup
 
 } from "mdbreact";
 import MUIDataTable from "mui-datatables";
@@ -127,6 +128,10 @@ registrar(){
   this.props.history.push("/paquetes") 
 }
 
+renovacion(){
+  this.props.history.push("/renovacion")
+}
+
   render() {
     const columns = ["Administrador","Paquete Empleados", "Empresas",  "Vendido a","RFC","Telefono","Fecha de Venta"];
 
@@ -226,53 +231,43 @@ registrar(){
     return (
         <React.Fragment>
       
-            <MDBContainer style={{marginTop:20,marginBottom:60}}>
-            <Card >
-            <CardActionArea>
-       
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Vista General 
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          <MDBContainer > <Alert className ="mt-4" color ="primary ">Movimientos Realizados por {this.state.AdminAlfa.nombreAdmin}</Alert>
+                 <MDBContainer style={{marginTop:20,marginBottom:40}}>
+                    <Card >
+                    <CardActionArea>
+              
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          Vista General 
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  <MDBContainer > <Alert className ="mt-4" color ="primary ">Movimientos Realizados por {this.state.AdminAlfa.nombreAdmin}</Alert>
 
-        <section className="flex-column"  >
-        <div>     <MDBRow>
-                  
-                  <MDBCol>  
-                  <Button style={{marginLeft:"10%"}}  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea Registrar?')) this.registrar()} }>
-                  Registrar Paquetes
-                  </Button>
-                  </MDBCol>
-                  <MDBCol>                  
-                  <Button  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => this.setState({register473:'1'}) }>
-                    Registrar Admin. Alfa
-                  </Button>
-   
+                <section className="flex-column"  >
+                <div style={{marginLeft:"5%"}}>     
+                  <MDBRow>
+                  <MDBDropdown outline>
+                    <MDBDropdownToggle caret color="danger">
+                      Opciones
+                    </MDBDropdownToggle >
+                    <MDBDropdownMenu  color="danger">
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea Registrar?')) this.registrar()} }>Registrar paquetes</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => this.setState({register473:'1'}) }>Registrar Admin. Alfa</MDBDropdownItem>
+                      <MDBDropdownItem divider />
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacion()} }>N.o Facturación Pendiente</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacionRealizada()} }>Sistemas vendidos por web</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.renovacion()} }>Renovaciones</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.renovacion()} }>Promociones</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea Salir?')) this.logOut()} }>Salir</MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+               
+                  <MDBCol>                     
                   {register473}
                   </MDBCol>
-                  <MDBCol>  
-                  <Button style={{marginLeft:"10%"}}  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacion()} }>
-                    N.o Facturación Pendiente
-                  </Button>
-                  </MDBCol>
-                  <MDBCol>  
-                  <Button style={{marginLeft:"10%"}}  startIcon={<DoneOutlineIcon />} color="primary" onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacionRealizada()} }>
-                    Sistemas vendidos por web
-                  </Button>
-                  </MDBCol>
-                  <MDBCol>
-                  <Button startIcon={<CloseOutlinedIcon />}  color="secondary"    onClick={(e) => { if (window.confirm('¿Desea Salir?')) this.logOut()} }>
-                  Salir
-                  </Button> 
-                  </MDBCol>
-                 
-                  
                   </MDBRow>
-        </div>
-        <br/>
+                </div>
+                <br/>
 
         
 

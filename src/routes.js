@@ -21,6 +21,9 @@ import React, { Component } from 'react';
  import SignAlfa from './components/views/SignUp/signUpAdminAlfa';
  import DashboardAdminAlfa from './components/dashboardAdminAlfa/dashboard';
  import Renovacion from './components/dashboardAdminAlfa/renovacion';
+ import Promocion from './components/dashboardAdminAlfa/promocion';
+ import Sistemas from './components/dashboardAdminAlfa/sistemas';
+
 
 class Routes extends Component{
   
@@ -49,6 +52,8 @@ class Routes extends Component{
                   {/* <PrivateRoute exact path='/result' component={Result}/> */}
                   <PrivateRoute exact path='/dashboardAdminAlfa' component={DashboardAdminAlfa}/>
                   <PrivateRoute exact path='/renovacion' component={Renovacion}/>
+                  <PrivateRoute exact path='/promociones' component={Promocion}/>
+                  <PrivateRoute exact path='/usuariosDiagnostico' component={Sistemas}/>
 
               </main>
               </Switch>

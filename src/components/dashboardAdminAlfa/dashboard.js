@@ -13,10 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {MDBRow, MDBCol,MDBTable, MDBTableBody, MDBBtn } from 'mdbreact';
 import Paper from '@material-ui/core/Paper';
-import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import { PDFExport } from '@progress/kendo-react-pdf';
-import VerticalAlignBottomOutlinedIcon from '@material-ui/icons/VerticalAlignBottomOutlined';
 import {Alert} from 'reactstrap'
 import {
   MDBDropdown,
@@ -132,6 +130,13 @@ renovacion(){
   this.props.history.push("/renovacion")
 }
 
+promocion(){
+  this.props.history.push("/promociones")
+}
+
+sistemas(){
+  this.props.history.push("/usuariosDiagnostico")
+}
   render() {
     const columns = ["Administrador","Paquete Empleados", "Empresas",  "Vendido a","RFC","Telefono","Fecha de Venta"];
 
@@ -257,7 +262,8 @@ renovacion(){
                       <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacion()} }>N.o Facturación Pendiente</MDBDropdownItem>
                       <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.facturacionRealizada()} }>Sistemas vendidos por web</MDBDropdownItem>
                       <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.renovacion()} }>Renovaciones</MDBDropdownItem>
-                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.renovacion()} }>Promociones</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.promocion()} }>Promociones</MDBDropdownItem>
+                      <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea ver los datos?')) this.sistemas()} }><strong>Sistemas existentes funcionando</strong></MDBDropdownItem>
                       <MDBDropdownItem onClick={(e) => { if (window.confirm('¿Desea Salir?')) this.logOut()} }>Salir</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>

@@ -129,7 +129,12 @@ class Comprar extends Component {
           paquete = 3
         }else if(rfcSelct == '1rfc4'){
           paquete = 4
+        }else if(rfcSelct == '1rfc5'){
+          paquete = 21
+        }else if(rfcSelct == '1rfc6'){
+          paquete = 26
         }
+
         if(rfcSelct == '3rfc1'){
           paquete = 5
         }else if(rfcSelct == '3rfc2'){
@@ -138,7 +143,12 @@ class Comprar extends Component {
           paquete = 7
         }else if(rfcSelct == '3rfc4'){
           paquete = 8
+        }else if(rfcSelct == '3rfc5'){
+          paquete = 22
+        }else if(rfcSelct == '3rfc6'){
+          paquete = 27
         }
+
         if(rfcSelct == '5rfc1'){
           paquete = 9
         }else if(rfcSelct == '5rfc2'){
@@ -147,7 +157,12 @@ class Comprar extends Component {
           paquete = 11
         }else if(rfcSelct == '5rfc4'){
           paquete = 12
+        }else if(rfcSelct == '5rfc5'){
+          paquete = 23
+        }else if(rfcSelct == '5rfc6'){
+          paquete = 28
         }
+
         if(rfcSelct == '10rfc1'){
           paquete = 13
         }else if(rfcSelct == '10rfc2'){
@@ -156,7 +171,12 @@ class Comprar extends Component {
           paquete = 15
         }else if(rfcSelct == '10rfc4'){
           paquete = 16
+        }else if(rfcSelct == '10rfc5'){
+          paquete = 24
+        }else if(rfcSelct == '10rfc6'){
+          paquete = 29
         }
+        
         if(rfcSelct == '20rfc1'){
           paquete = 17
         }else if(rfcSelct == '20rfc2'){
@@ -165,7 +185,12 @@ class Comprar extends Component {
           paquete = 19
         }else if(rfcSelct == '20rfc4'){
           paquete = 20
+        }else if(rfcSelct == '20rfc5'){
+          paquete = 25
+        }else if(rfcSelct == '20rfc6'){
+          paquete = 30
         }
+        
         var nombre = this.state.nombre.toUpperCase(); 
         var apellidos = this.state.apellidos.toUpperCase();
         var rfc = this.state.rfc.toUpperCase();
@@ -488,6 +513,9 @@ class Comprar extends Component {
                                         <option value="1rfc2">de 16 a 50 empleados</option>
                                         <option value="1rfc3">de 51 a 100 empleados</option>
                                         <option value="1rfc4">de 101 a 200 empleados</option>
+                                        <option value="1rfc5">de 201 a 300 empleados</option>
+                                        <option value="1rfc6">de 301 a 400 empleados</option>
+
                                     </select>
                                     {validacion}
                                     </div>
@@ -499,6 +527,9 @@ class Comprar extends Component {
                                         <option value="3rfc2">de 16 a 50 empleados</option>
                                         <option value="3rfc3">de 51 a 100 empleados</option>
                                         <option value="3rfc4">de 101 a 200 empleados</option>
+                                        <option value="3rfc5">de 201 a 300 empleados</option>
+                                        <option value="3rfc6">de 301 a 400 empleados</option>
+
                                     </select>
                                     {validacion}
                                     </div>
@@ -510,6 +541,8 @@ class Comprar extends Component {
                                         <option value="5rfc2">de 16 a 50 empleados</option>
                                         <option value="5rfc3">de 51 a 100 empleados</option>
                                         <option value="5rfc4">de 101 a 200 empleados</option>
+                                        <option value="5rfc5">de 201 a 300 empleados</option>
+                                        <option value="5rfc6">de 301 a 400 empleados</option>
                                     </select>
                                     {validacion}
                                     </div>
@@ -521,6 +554,8 @@ class Comprar extends Component {
                                         <option value="10rfc2">de 16 a 50 empleados</option>
                                         <option value="10rfc3">de 51 a 100 empleados</option>
                                         <option value="10rfc4">de 101 a 200 empleados</option>
+                                        <option value="10rfc5">de 201 a 300 empleados</option>
+                                        <option value="10rfc6">de 301 a 400 empleados</option>
                                     </select>
                                     {validacion}
                                     </div>
@@ -532,6 +567,8 @@ class Comprar extends Component {
                                         <option value="20rfc2">de 16 a 50 empleados</option>
                                         <option value="20rfc3">de 51 a 100 empleados</option>
                                         <option value="20rfc4">de 101 a 200 empleados</option>
+                                        <option value="10rfc5">de 201 a 300 empleados</option>
+                                        <option value="10rfc6">de 301 a 400 empleados</option>
                                     </select>
                                     {validacion}
                                  </div>             

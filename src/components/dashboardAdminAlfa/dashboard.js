@@ -1,7 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import logo from '../images/diagnostico.png'
-import { AppNavbarBrand } from '@coreui/react';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,10 +8,9 @@ import {
   } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import {MDBRow, MDBCol,MDBTable, MDBTableBody, MDBBtn } from 'mdbreact';
+import {MDBRow, MDBCol} from 'mdbreact';
 import Paper from '@material-ui/core/Paper';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
-import { PDFExport } from '@progress/kendo-react-pdf';
 import {Alert} from 'reactstrap'
 import {
   MDBDropdown,
@@ -22,7 +18,6 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
   MDBContainer,
-  MDBBtnGroup
 
 } from "mdbreact";
 import MUIDataTable from "mui-datatables";
@@ -31,7 +26,7 @@ import "../../index.css";
 import { DialogUtility } from '@syncfusion/ej2-popups';
 import axios from 'axios'
 import { API} from '../utils/http'
-import { TextField, Radio, Select } from 'final-form-material-ui';
+import { TextField} from 'final-form-material-ui';
 
 function onSubmit (values) {
 };
@@ -274,9 +269,6 @@ sistemas(){
                   </MDBRow>
                 </div>
                 <br/>
-
-        
-
         <MDBContainer style={{padding:20}}>
          <Paper>
          <MUIDataTable

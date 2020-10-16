@@ -133,6 +133,8 @@ class Comprar extends Component {
           paquete = 21
         }else if(rfcSelct == '1rfc6'){
           paquete = 26
+        }else if(rfcSelct == '1rfc7'){
+          paquete = 31
         }
 
         if(rfcSelct == '3rfc1'){
@@ -147,6 +149,8 @@ class Comprar extends Component {
           paquete = 22
         }else if(rfcSelct == '3rfc6'){
           paquete = 27
+        }else if(rfcSelct == '3rfc7'){
+          paquete = 32
         }
 
         if(rfcSelct == '5rfc1'){
@@ -161,6 +165,8 @@ class Comprar extends Component {
           paquete = 23
         }else if(rfcSelct == '5rfc6'){
           paquete = 28
+        }else if(rfcSelct == '5rfc7'){
+          paquete = 33
         }
 
         if(rfcSelct == '10rfc1'){
@@ -175,6 +181,8 @@ class Comprar extends Component {
           paquete = 24
         }else if(rfcSelct == '10rfc6'){
           paquete = 29
+        }else if(rfcSelct == '10rfc7'){
+          paquete = 34
         }
         
         if(rfcSelct == '20rfc1'){
@@ -189,6 +197,8 @@ class Comprar extends Component {
           paquete = 25
         }else if(rfcSelct == '20rfc6'){
           paquete = 30
+        }else if(rfcSelct == '20rfc7'){
+          paquete = 35
         }
         
         var nombre = this.state.nombre.toUpperCase(); 
@@ -211,7 +221,7 @@ class Comprar extends Component {
               registroSuperUser(data:"${[nombre,apellidos,rfc,razonS,telefono,correo,contraseña,idAdminAlfa,fecha,paquete,correoAdminAlfa]}"){
             
                 message
-                token
+                
                   }
                 }
             `
@@ -515,6 +525,7 @@ class Comprar extends Component {
                                         <option value="1rfc4">de 101 a 200 empleados</option>
                                         <option value="1rfc5">de 201 a 300 empleados</option>
                                         <option value="1rfc6">de 301 a 400 empleados</option>
+                                        <option value="1rfc7">de 401 a 500 empleados</option>
 
                                     </select>
                                     {validacion}
@@ -529,6 +540,7 @@ class Comprar extends Component {
                                         <option value="3rfc4">de 101 a 200 empleados</option>
                                         <option value="3rfc5">de 201 a 300 empleados</option>
                                         <option value="3rfc6">de 301 a 400 empleados</option>
+                                        <option value="3rfc7">de 401 a 500 empleados</option>
 
                                     </select>
                                     {validacion}
@@ -543,6 +555,8 @@ class Comprar extends Component {
                                         <option value="5rfc4">de 101 a 200 empleados</option>
                                         <option value="5rfc5">de 201 a 300 empleados</option>
                                         <option value="5rfc6">de 301 a 400 empleados</option>
+                                        <option value="5rfc7">de 401 a 500 empleados</option>
+
                                     </select>
                                     {validacion}
                                     </div>
@@ -556,6 +570,8 @@ class Comprar extends Component {
                                         <option value="10rfc4">de 101 a 200 empleados</option>
                                         <option value="10rfc5">de 201 a 300 empleados</option>
                                         <option value="10rfc6">de 301 a 400 empleados</option>
+                                        <option value="10rfc7">de 401 a 500 empleados</option>
+
                                     </select>
                                     {validacion}
                                     </div>
@@ -569,6 +585,8 @@ class Comprar extends Component {
                                         <option value="20rfc4">de 101 a 200 empleados</option>
                                         <option value="10rfc5">de 201 a 300 empleados</option>
                                         <option value="10rfc6">de 301 a 400 empleados</option>
+                                        <option value="10rfc7">de 401 a 500 empleados</option>
+
                                     </select>
                                     {validacion}
                                  </div>             

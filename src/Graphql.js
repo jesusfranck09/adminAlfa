@@ -24,3 +24,5 @@ import { createUploadLink } from 'apollo-upload-client';
     link: authLink.concat(httpLink),
     cache: new InMemoryCache()
 });
+
+

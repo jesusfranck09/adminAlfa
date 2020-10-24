@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Paper from '@material-ui/core/Paper';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
-import { MDBBtn, MDBCard, MDBCardBody, MDBTable,MDBTableBody,MDBTableHead,MDBCol, MDBCardHeader,MDBContainer,MDBRow } from 'mdbreact';
+import { MDBBtn, MDBCard, MDBCardBody,MDBCol, MDBCardHeader,MDBRow } from 'mdbreact';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,6 +12,7 @@ import Slide from '@material-ui/core/Slide';
 import  axios from 'axios'
 import {API} from '../utils/http'
 import { DialogUtility } from '@syncfusion/ej2-popups';
+import Navbar from '../dashboardAdminAlfa/Navbar'
 
 class Comprar extends Component {
     constructor(props){
@@ -204,7 +204,7 @@ class Comprar extends Component {
         var nombre = this.state.nombre.toUpperCase(); 
         var apellidos = this.state.apellidos.toUpperCase();
         var rfc = this.state.rfc.toUpperCase();
-        var razonS = this.state.razonS.toUpperCase();
+        var razonS = this.state.razonS.toUpperCase().replace(/,/g, "");
         var telefono = this.state.telefono.toUpperCase();
         var correo = this.state.correo.toUpperCase();
         var contraseña = this.state.contraseña;
@@ -212,6 +212,7 @@ class Comprar extends Component {
         var date= new Date()
         var fecha = date.toLocaleString('es')
         const correoAdminAlfa  = localStorage.getItem("correoAdminAlfa")
+    
         axios({
           url:  API,
           method:'post',
@@ -333,15 +334,15 @@ class Comprar extends Component {
           }
         
         return(
-            <React.Fragment>
-                <MDBContainer  style={{marginTop:"2%"}}  >
+            <div>
+              <Navbar/>
+                <div  style={{marginTop:"2%"}}  >
                     <MDBRow >
-                        <MDBCol sm="12">
                        
-                        <MDBCol sm="12">
-                        <MDBCard narrow >
-                            <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-2 mx-4 mb-3">
-                            <a href="#" className="white-text mx-3">Datos del cliente</a>
+                        <MDBCol md="10">
+                        <MDBCard narrow style={{width:"100%",heigth:"60%"}}  >
+                            <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-3 mx-5 mb-4">
+                            <h6 className="mt-2"><strong>Datos del cliente</strong></h6>
                             </MDBCardHeader>
                             <MDBCardBody>
                             <form
@@ -350,7 +351,7 @@ class Comprar extends Component {
                             noValidate
                             >
                             <MDBRow>
-                                <MDBCol md="4" className="mb-3">
+                                <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="nombre"
                                     class="grey-text"
@@ -372,7 +373,7 @@ class Comprar extends Component {
                                 </div>
                                 <div class="valid-feedback">correcto</div>
                                 </MDBCol>
-                                <MDBCol md="4" class="mb-3">
+                                <MDBCol md="3" class="mb-3">
                                 <label
                                     htmlFor="apellidos"
                                     class="grey-text"
@@ -394,7 +395,7 @@ class Comprar extends Component {
                                 </div>
                                 <div class="valid-feedback">correcto</div>
                                 </MDBCol>
-                                <MDBCol md="4" class="mb-3">
+                                <MDBCol md="3" class="mb-3">
                                 <label
                                     htmlFor="rfc"
                                     class="grey-text"
@@ -416,10 +417,8 @@ class Comprar extends Component {
                                 </div>
                                 <div class="valid-feedback">correcto</div>
                                 </MDBCol>
-                            </MDBRow>
-                            <MDBRow>
-                            
-                               <MDBCol md="4" class="mb-3">
+                           
+                               <MDBCol md="3" class="mb-3">
                                 <label
                                     htmlFor="razonS"
                                     class="grey-text"
@@ -438,7 +437,10 @@ class Comprar extends Component {
                                 />
                               
                                 </MDBCol>
-                                <MDBCol md="4" class="mb-3">
+                                </MDBRow>
+                                <MDBRow>
+                            
+                                <MDBCol md="3" class="mb-3">
                                 <label
                                     htmlFor="telefono"
                                     class="grey-text"
@@ -459,7 +461,7 @@ class Comprar extends Component {
                                     !Requerido
                                 </div>
                                 </MDBCol>
-                                <MDBCol md="4" className="mb-3">
+                                <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="correo"
                                     class="grey-text"
@@ -481,7 +483,7 @@ class Comprar extends Component {
                                 </div>
                                 </MDBCol>
                                
-                                <MDBCol md="4" className="mb-3">
+                                <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="contraseña"
                                     class="grey-text"
@@ -503,12 +505,14 @@ class Comprar extends Component {
                                    !Requerido
                                 </div>
                                 <div class="valid-feedback">verificado</div>
+                                  
+                                </MDBCol> 
+                                <MDBCol  md="3" style={{marginTop:"3%"}}>
                                 <i
-                                  style={{margin:30}}
                                   className="fa fa-eye password-icon"
                                   onClick={this.togglePasswordVisiblity}
-                                />    
-                                </MDBCol>   
+                                /> 
+                                  </MDBCol>  
                                                    
                             </MDBRow> 
                             <MDBCardHeader className="view view-cascade gradient-card-header  d-flex justify-content-between align-items-center py-2 mx-4 mb-3">
@@ -588,30 +592,28 @@ class Comprar extends Component {
                                         <option value="10rfc7">de 401 a 500 empleados</option>
 
                                     </select>
+                                  
                                     {validacion}
-                                 </div>             
+                                 </div>   
+                                 <div style={{marginTop:"2%",marginLeft:"10%"}} >
+                                   <MDBBtn color="success" type="submit" size="md" >
+                                            Registrar
+                                  </MDBBtn>
+                                  </div>          
                                 </div>
-                                <MDBCol className="mt-3" style={{marginLeft:"40%"}}>
-                                    <MDBBtn color="primary" type="submit" >
-                                        Registrar
-                                    </MDBBtn>
-                                </MDBCol>                
+                               
                             </form>
+                           
                             </MDBCardBody>
                         </MDBCard>
                         </MDBCol>
-                        </MDBCol>
                         </MDBRow>
                         {modal}
-                    </MDBContainer>
+                    </div>
                
-            </React.Fragment>
+            </div>
         )
     }
 }
 
 export default Comprar
-
-
-
-

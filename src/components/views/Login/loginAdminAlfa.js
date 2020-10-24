@@ -1,20 +1,10 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-import { BrowserRouter as Router } from "react-router-dom";
-import { InputGroup, InputGroupAddon, InputGroupText,Input } from 'reactstrap';
-import logo from '../../images/logotipo.png'
 import diagnostico from '../../images/diagnostico.png'
 import "mdbreact/dist/css/mdb.css";
-
-import { AppNavbarBrand } from '@coreui/react';
+import {MDBInput} from 'mdbreact'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import {
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarNav,
-  MDBNavbarToggler,
-  MDBCollapse,
   MDBMask,
   MDBRow,
   MDBCol,
@@ -24,10 +14,6 @@ import {
   MDBAnimation,
   MDBCard,
   MDBCardBody,
-  MDBIcon,
-  MDBNavItem,
-  MDBNavLink,
-  MDBCardHeader
 } from "mdbreact";
 import "./index.css";
 import { Mutation } from 'react-apollo';
@@ -41,20 +27,19 @@ const LOGIN = gql`
           message 
           token    
           correo
+          nombre
         }
     }
 `
-
-
 class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             email: '',
             password: '',
-            isPasswordShown: false
-
+            isPasswordShown: false,
         }
+        this.handleData = this.handleData.bind(this)
       }
 componentWillMount(){
     localStorage.removeItem("elToken")
@@ -99,7 +84,6 @@ handleInput = (e) => {
   
   handleData = (data) => {
 
-
     console.log("data del dash" , data)
     if (data.loginAdminAlfa.token === 'no hay token' && data.loginAdminAlfa.message=="ningun dato"){
       DialogUtility.alert({
@@ -125,29 +109,37 @@ handleInput = (e) => {
      
 
       if(data.loginAdminAlfa.message=='Login exitoso'){
-       
+        console.log("data del admin",data.loginAdminAlfa )
+        var texto = "";
+        var ahora=new Date(); 
+        var hora=ahora.getHours();
+        console.log("hora" , hora)
+        if (hora>=6 && hora<13) {
+            texto="Buenos días";  
+        } else if (hora>=13 && hora<21) { 
+            texto="Buenas tardes";
+        } else { 
+            texto="Buenas noches";
+        }
       localStorage.setItem('elToken', data.loginAdminAlfa.token)  
       localStorage.setItem('idAdminAlfa', data.loginAdminAlfa.id) 
       localStorage.setItem('correoAdminAlfa', data.loginAdminAlfa.correo) 
       DialogUtility.alert({
         animationSettings: { effect: 'Zoom' },           
-        title: 'Sesión iniciada exitosamente!',
+        title: `Hola ${texto} ${data.loginAdminAlfa.nombre}`,
+        content:"Su sesón ha iniciado exitosamente" , 
         position: "fixed",
+        
     })
 
     this.props.history.push("/dashboardAdminAlfa")    
   }
   }
+
+  
   render() {
     const { isPasswordShown } = this.state;
 
-    const overlay = (
-      <div
-        id="sidenav-overlay"
-        style={{ backgroundColor: "transparent" }}
-        onClick={this.handleTogglerClick}
-      />
-    );
     return (
         <Mutation mutation={LOGIN}>
         {
@@ -160,107 +152,53 @@ handleInput = (e) => {
         <React.Fragment>
     <form onSubmit={e => this.handleForm(e, loginAdminAlfa)}>
       <div id="apppage">
-        <Router>
-          <div>
-            <MDBNavbar
-              color="primary-color"
-              dark
-              expand="md"
-              fixed="top"
-              scrolling
-              transparent
-            >
-              <MDBContainer>
-                <MDBNavbarBrand>
-                <AppNavbarBrand
-                    full={{ src: diagnostico, width: 140, height: 45, alt: 'DIAGNOSTICO' }} />
-                  <strong className="white-text">Bienvenido</strong>
-                </MDBNavbarBrand>
-     
-                <MDBNavbarToggler />
-                <MDBCollapse >
-                  <MDBNavbarNav left>
-                    <MDBNavItem active>
-                      <MDBNavLink to="#!">Home</MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem>
-                      <MDBNavLink to="#!">Link</MDBNavLink>
-                    </MDBNavItem>
-                    <MDBNavItem>
-                      <MDBNavLink to="#!">Profile</MDBNavLink>
-                    </MDBNavItem>
-                  </MDBNavbarNav>
-        
-                </MDBCollapse>
-              </MDBContainer>
-            </MDBNavbar>
-            {this.state.collapsed && overlay}
-          </div>
-        </Router>
-        
-        <MDBView>
-          <MDBMask className="d-flex justify-content-center align-items-center gradient">
-            <MDBContainer>
-              <MDBRow>
-
-                <MDBCol
-                  md="6"
-                  className="white-text text-center text-md-left mt-xl-5 mb-5"
-                >
-                </MDBCol>
-                <MDBRow>
-                <MDBCol md="6" className="mb-8">
-                  <MDBAnimation type="fadeInRight" delay=".3s">
-                    <MDBCard id="classic-card"  >
-                      <MDBCardHeader ><h5 className="text-center"><i>Ingresar a Paquetes : </i></h5></MDBCardHeader>
-                      <MDBCardBody className="white-text">
-                     
-                        <hr className="hr-light" />
-
-                        <InputGroup   className="mb-3">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText><MDBIcon icon="user" /></InputGroupText>
-                        </InputGroupAddon>
-                        <Input id="email" onChange={this.handleInput} type="email"  placeholder="Correo" />
-                      </InputGroup>
-  
-
-                      <InputGroup className="mb-4">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                          <MDBIcon icon="lock" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input id="password" onChange={this.handleInput} type={isPasswordShown ? "text" : "password"} placeholder="Contraseña"/>
-                        <InputGroupText>
-                        <i
-                          className="fa fa-eye password-icon"
-                          onClick={this.togglePasswordVisiblity}
-                        />
-                        </InputGroupText>
-                      </InputGroup>                           
-                      <MDBRow>
-                        <MDBCol md="8">
-                          <MDBBtn  gradient="aqua"size="md" className="px-4" type='submit'>Entrar</MDBBtn>
-                        </MDBCol>
-                      </MDBRow>
-                    
-                      </MDBCardBody>
-                    
-
-                    </MDBCard>
-                  </MDBAnimation>
-                </MDBCol>
-                <MDBCol md="6" xl="5" className="mt-xl-5">
-                  <MDBAnimation type="fadeInRight" delay=".3s">
-                    <img
-                      src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.png"
-                      alt=""
-                      className="img-fluid"
-                    />
-                  </MDBAnimation>
-                </MDBCol>
-                </MDBRow>
+      <MDBView>
+          <MDBMask >
+            <MDBContainer style={{marginTop:"2%"}}>
+              <MDBRow  >
+              <img src ={diagnostico} style={{width:220,height:70}}/>
+              <MDBCol>
+              <MDBAnimation type="fadeInRight" delay=".3s">
+              <MDBCard className ="card">
+                <div className="header pt-3 grey lighten-2">
+                  <MDBRow className="d-flex justify-content-start">
+                    <h3 className="deep-grey-text mt-3 mb-4 pb-1 mx-5">
+                      Iniciar sesión
+                    </h3>
+                  </MDBRow>
+                </div>
+                  <MDBCardBody >
+                  <MDBRow style={{marginLeft:"5%"}}>
+                    <MDBInput label="Correo" group type="email" validate   id="email" onChange={this.handleInput} />
+                    <MDBInput
+                      id="password" 
+                      label="Contraseña"
+                      group
+                      validate
+                      onChange={this.handleInput} 
+                      type={isPasswordShown ? "text" : "password"}
+                    > </MDBInput>
+                    <i
+                    className="fa fa-eye password-icon"
+                    onClick={this.togglePasswordVisiblity}  style={{marginTop:"15%"}}/>
+                   
+                   </MDBRow>
+                    <div className="text-center mb-4">
+                    <MDBBtn
+                      color='success'
+                      rounded
+                      type='submit'
+                      className='btn-block z-depth-1'
+                    >
+                      Ingresar
+                    </MDBBtn>
+                    </div>
+                  
+                  </MDBCardBody>
+                </MDBCard>
+                </MDBAnimation>   
+              </MDBCol>
+|
               </MDBRow>          
             </MDBContainer>
           </MDBMask>

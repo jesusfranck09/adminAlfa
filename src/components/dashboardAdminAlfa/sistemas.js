@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import { MDBBtn, MDBModal, MDBModalFooter, MDBModalHeader,MDBContainer,MDBTable,MDBModalBody,MDBTableHead,MDBTableBody  } from 'mdbreact';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { MDBBtn, MDBModal, MDBModalFooter, MDBModalHeader,MDBContainer,MDBModalBody} from 'mdbreact';
 import axios from 'axios'
 import {API} from '../utils/http'
 import MUIDataTable from "mui-datatables";
-import { DialogUtility } from '@syncfusion/ej2-popups';
+import Navbar from './Navbar'
 
 
 class  Facturacion extends Component {
@@ -123,15 +118,9 @@ class  Facturacion extends Component {
    
         return(
            <React.Fragment>
-             <div style={{padding:20}}>
-                <CardActionArea>
-                <CardContent>
-                    <Typography gutterBottom >
-                    <h5><i>Vista general de los clientes, Nota: la tabla no muestra un reporte detallado de cada usuario</i><MDBBtn size="md"style={{marginLeft:"10%"}} onClick={this.toggle}>Ver paquetes</MDBBtn></h5>
-                    </Typography>
-                </CardContent>
-                </CardActionArea>
-            
+             <Navbar/>
+             <div style={{width:"90%",marginLeft:"8%",marginTop:"2%"}}>
+                <MDBBtn color="secondary"  size="md"style={{marginLeft:"80%",marginBottom:"2%"}} onClick={this.toggle}>Ver paquetes</MDBBtn>
                 <MUIDataTable
                 title={`Clientes existentes utilizando Diagnóstico035`}
                 data={data}
@@ -143,144 +132,137 @@ class  Facturacion extends Component {
             </div>
             <MDBContainer>
             <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-              <MDBModalHeader toggle={this.toggle}>Listado de paquetes existentes</MDBModalHeader>
-              <MDBModalBody>
-              <MDBTable responsive>
-                <MDBTableHead>
-                    <tr>
-                    <th>Id</th>
+              <MDBModalHeader toggle={this.toggle}>Paquetes existentes</MDBModalHeader>
+              <MDBModalBody>                
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                  <th>Id</th>
                     <th>RFC</th>
                     <th>Empresas</th>
                     <th>Empleados</th>
-                    </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                    <tr>
-                    <td><strong>1</strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
                     <td>1</td>
                     <td>1</td>
                     <td>15</td>
-                    </tr>
-                    <tr>
-                    <td><strong>2</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
                     <td>1</td>
                     <td>1</td>
                     <td>50</td>
-                    </tr>
-                    <tr>
-                    <td><strong>3</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
                     <td>1</td>
                     <td>1</td>
                     <td>100</td>
-                    </tr>
-                    <tr>
-                    <td><strong>4</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
                     <td>1</td>
                     <td>1</td>
                     <td>200</td>
-                    </tr>
-                    <tr>
-                    <td><strong>5</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
                     <td>3</td>
                     <td>3</td>
                     <td>15</td>
-                    </tr>
-                    <tr>
-                    <td><strong>6</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
                     <td>3</td>
                     <td>3</td>
                     <td>50</td>
-                    </tr>
-                    <tr>
-                    <td><strong>7</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
                     <td>3</td>
                     <td>3</td>
                     <td>100</td>
-                    </tr>
-                    <tr>
-                    <td><strong>8</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
                     <td>3</td>
                     <td>3</td>
                     <td>200</td>
-                    </tr>
-                    <tr>
-                    <td><strong>9</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">9</th>
                     <td>5</td>
                     <td>5</td>
                     <td>15</td>
-                    </tr>
-                    <tr>
-                    <td><strong>10</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10</th>
                     <td>5</td>
                     <td>5</td>
                     <td>50</td>
-                    </tr>
-                    <tr>
-                    <td><strong>11</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">11</th>
                     <td>5</td>
                     <td>5</td>
                     <td>100</td>
-                    </tr>
-                    <tr>
-                    <td><strong>12</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">12</th>
                     <td>5</td>
                     <td>5</td>
                     <td>200</td>
-                    </tr>
-                    <tr>
-                    <td><strong>13</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">13</th>
                     <td>10</td>
                     <td>10</td>
                     <td>15</td>
-                    </tr>
-                    <tr>
-                    <td><strong>14</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">14</th>
                     <td>10</td>
                     <td>10</td>
                     <td>50</td>
-                    </tr>
-                    <tr>
-                    <td><strong>15</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">16</th>
                     <td>10</td>
                     <td>10</td>
                     <td>100</td>
-                    </tr>
-                    <tr>
-                    <td><strong>16</strong></td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>200</td>
-                    </tr>
-                    <tr>
-                    <td><strong>17</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">17</th>
                     <td>20</td>
                     <td>20</td>
                     <td>15</td>
-                    </tr>
-                    <tr>
-                    <td><strong>18</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">18</th>
                     <td>20</td>
                     <td>20</td>
                     <td>50</td>
-                    </tr>
-                    <tr>
-                    <td><strong>19</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">19</th>
                     <td>20</td>
                     <td>20</td>
                     <td>100</td>
-                    </tr>
-                    <tr>
-                    <td><strong>20</strong></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">20</th>
                     <td>20</td>
                     <td>20</td>
                     <td>200</td>
-                    </tr>
-                </MDBTableBody>
-                </MDBTable>
-              
+                  </tr>
+                </tbody>
+              </table>
               </MDBModalBody>
               <MDBModalFooter>
-                <MDBBtn color="danger" onClick={this.toggle}>Cerrar</MDBBtn>
+                <MDBBtn color="success" size="md"onClick={this.toggle}>Cerrar</MDBBtn>
               </MDBModalFooter>
             </MDBModal>
           </MDBContainer>

@@ -1,13 +1,12 @@
 
 import React, { Component } from 'react';
-import { Button as Boton, Card, CardBody, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button as Boton, Card, CardBody, Form, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { DialogUtility } from '@syncfusion/ej2-popups';
 import {Alert} from 'reactstrap'
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import axios from 'axios'
-
+import Navbar from '../../dashboardAdminAlfa/Navbar' 
 import {MDBIcon} from 'mdbreact'
  const SIGNUP = gql`
     mutation SIGNUP($first_name:String,
@@ -106,81 +105,62 @@ handleData = (data) => {
     return (
       <Mutation mutation={SIGNUP}>
       {
-        (signup, {data, error, loading}) => {
-         if (loading) console.log(loading);
-        if (data){
-          console.log("hay datos en el formulario" , data)
-          this.handleData(data)} 
+      (signup, {data, error, loading}) => {
+      if (loading) console.log(loading);
+      if (data){
+        console.log("hay datos en el formulario" , data)
+        this.handleData(data)} 
 
-          
-         
-          return ( 
-
+     return ( 
       <React.Fragment>
-   <form onSubmit={e => this.handleForm(e, signup)}>
-      <div className="app flex-row align-items-center">
-        <Container>
-          <Row className="justify-content-center">
-            <Col xs="8">
-              <CardGroup>
-                <Card className="p-8">
-                  <CardBody>
-                    <Form>                      
-                     <h1><Alert color="primary" className="text-center mt-4 ">Registrar Administrador ADS</Alert></h1>
-                    
-                      <InputGroup className="mb-3">
-                        
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                          <MDBIcon icon="male"/>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input id="first_name" onChange={this.handleInput} type="text"  placeholder="Nombre" />
-                      </InputGroup>
-
-
-                      <InputGroup className="mb-3">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                          <MDBIcon icon="male"/>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input id="last_name" onChange={this.handleInput} type="text"  placeholder="Apellidos" />
-                      </InputGroup>
-
-                      <InputGroup className="mb-3">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                          <MDBIcon icon="at" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input id="email" onChange={this.handleInput} type="email"  placeholder="Correo" />
-                      </InputGroup>
-
-                      <InputGroup className="mb-4">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                          <MDBIcon icon="lock" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input id="password" onChange={this.handleInput} type="password" placeholder="Contraseña"/>
-                      </InputGroup>
-                      <Row>
-                        <Col xs="6">
-                          <Boton outline color="primary" className="px-4" type='submit'>Registrar administrador</Boton>
-                        </Col>
-                        
-                  </Row>
-                    </Form>
-                  </CardBody>
-                </Card>
-              </CardGroup>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+      <Navbar/>  
+      <form onSubmit={e => this.handleForm(e, signup)}>
+          <div style={{marginTop:"2%",marginLeft:"20%"}}>
+              <Card style={{width:"50%"}}>
+              <h1><Alert color="primary" className="text-center mt-4 ">Registrar administrador ADS</Alert></h1>
+                <CardBody>
+                  <Form>                      
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                        <MDBIcon icon="male"/>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input id="first_name" onChange={this.handleInput} type="text"  placeholder="Nombre" />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                        <MDBIcon icon="male"/>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input id="last_name" onChange={this.handleInput} type="text"  placeholder="Apellidos" />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                        <MDBIcon icon="at" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input id="email" onChange={this.handleInput} type="email"  placeholder="Correo" />
+                    </InputGroup>
+                    <InputGroup className="mb-4">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                        <MDBIcon icon="lock" />
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input id="password" onChange={this.handleInput} type="password" placeholder="Contraseña"/>
+                    </InputGroup>  
+                      <center>
+                        <Boton   color="success" type='submit'>Registrar administrador</Boton>
+                      </center>
+                  </Form>
+                </CardBody>
+              </Card>
+          </div>
       </form>
-      
+          
       </React.Fragment>
           ) 
         }

@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead,MDBContainer,MDBCard,MDBCardBody  } from 'mdbreact';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { MDBBtn} from 'mdbreact';
 import axios from 'axios'
 import {API} from '../utils/http'
 import MUIDataTable from "mui-datatables";
 import { DialogUtility } from '@syncfusion/ej2-popups';
-
+import Navbar from '../dashboardAdminAlfa/Navbar'
 
 class  Facturacion extends Component {
     constructor(props){
@@ -123,15 +118,15 @@ class  Facturacion extends Component {
 
     render(){
 
-        const columns = ["id" , "idPAgo","FechaPago", "Carrito",  "id Paypal","Cliente Paypal","Apellidos","Correo","Dirección","CP","Ciudad","Estado","Metodo de pago","Status","Subtotal","Total","Moneda"];
-        const columns2 = ["id","No.factura","Nombre", "Apellidos",  "RFC","Razón social","Telefono","Correo","Paquete"];
+        const columns = [ "idPAgo","FechaPago", "Carrito",  "id Paypal","Cliente Paypal","Apellidos","Dirección","CP","Ciudad","Estado","Metodo de pago","Status","Subtotal","Total","Moneda"];
+        const columns2 = ["No.factura","Nombre", "Apellidos",  "RFC","Razón social","Telefono","Paquete"];
 
         const data = this.state.cardpay.map(rows=>{
-            return([rows.ids,rows.idPago,rows.fechaPago,rows.carrito ,rows.idPaypalCliente ,rows.nombrePaypalCliente,rows.apellidosPaypalCliente,rows.correoPaypalCliente,rows.direccion1PaypalCliente + " " + rows.direccion2PaypalCliente,rows.cpPaypalCliente,rows.ciudadClientePaypal,rows.estadoPaypalCliente,rows.metodoPago, rows.statusPago,rows.subtotalTransaccion,rows.montoTransaccion,rows.monedaTransaccion])
+            return([rows.idPago,rows.fechaPago,rows.carrito ,rows.idPaypalCliente ,rows.nombrePaypalCliente,rows.apellidosPaypalCliente,rows.direccion1PaypalCliente + " " + rows.direccion2PaypalCliente,rows.cpPaypalCliente,rows.ciudadClientePaypal,rows.estadoPaypalCliente,rows.metodoPago, rows.statusPago,rows.subtotalTransaccion,rows.montoTransaccion,rows.monedaTransaccion])
           })
         const data2 = this.state.cardpay.map(rows=>{
-        let boton  = <form onSubmit={this.handleSubmit}><label>No.Factura<input type="text" value={this.state.value} onChange={this.handleChange} /></label><MDBBtn onClick={(e) => { if (window.confirm('¿El número de factura es correcto?')) this.click(rows.ids)}} color="purple" size="sm" type="submit">Enviar</MDBBtn></form> 
-        return([rows.ids,boton,rows.nombrecliente,rows.apellidosCliente,rows.rfcCliente,rows.razonSocialCliente,rows.telefonoCliente,rows.correoCliente,rows.paquete])
+        let boton  = <form onSubmit={this.handleSubmit}><input type="text" value={this.state.value} onChange={this.handleChange} style={{width:100}} /><MDBBtn onClick={(e) => { if (window.confirm('¿El número de factura es correcto?')) this.click(rows.ids)}} color="purple" size="sm" type="submit">Enviar</MDBBtn></form> 
+        return([boton,rows.nombrecliente,rows.apellidosCliente,rows.rfcCliente,rows.razonSocialCliente,rows.telefonoCliente,rows.paquete])
         })  
 
         let datosEmpleados;
@@ -182,17 +177,10 @@ class  Facturacion extends Component {
               }     };
           
         return(
-           
-             <MDBContainer style={{paddingTop:20}}>
-                <CardActionArea>
-        
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    <h5><i>Datos de facturacion de licencias vendidas por paypal</i></h5>    
-                    </Typography>
-                </CardContent>
-                </CardActionArea>
-               
+             <div>
+               <Navbar/>
+               <div style={{width:"90%",marginLeft:"8%",marginTop:"2%"}}>
+                
                 <MUIDataTable
                 title={`Datos del cliente para Diagnóstico035`}
                 data={data2}
@@ -208,7 +196,8 @@ class  Facturacion extends Component {
                 /> 
                 <br/>
                 <br/>
-                </MDBContainer>
+                </div>
+                </div>
 
         )
     }

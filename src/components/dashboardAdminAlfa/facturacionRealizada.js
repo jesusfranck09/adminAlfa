@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead,MDBContainer,MDBCard,MDBCardBody  } from 'mdbreact';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios'
 import {API} from '../utils/http'
 import MUIDataTable from "mui-datatables";
+import Navbar from './Navbar'
 
 class  Facturacion extends Component {
     constructor(props){
@@ -80,15 +77,15 @@ class  Facturacion extends Component {
 
     render(){
 
-        const columns = ["id" , "idPAgo","FechaPago", "Carrito",  "id Paypal","Cliente Paypal","Apellidos","Correo","Dirección","CP","Ciudad","Estado","Metodo de pago","Status","Subtotal","Total","Moneda"];
-        const columns2 = ["id","No.factura","Nombre", "Apellidos",  "RFC","Razón social","Telefono","Correo","Paquete"];
+        const columns = [ "idPAgo","FechaPago", "Carrito",  "id Paypal","Cliente Paypal","Apellidos","Correo","Dirección","CP","Ciudad","Estado","Metodo de pago","Status","Subtotal","Total","Moneda"];
+        const columns2 = ["No.factura","Nombre", "Apellidos",  "RFC","Razón social","Telefono","Correo","Paquete"];
 
         const data = this.state.cardpay.map(rows=>{
             console.log("rows" , rows)
-            return([rows.ids,rows.idPago,rows.fechaPago,rows.carrito ,rows.idPaypalCliente ,rows.nombrePaypalCliente,rows.apellidosPaypalCliente,rows.correoPaypalCliente,rows.direccion1PaypalCliente + " " + rows.direccion2PaypalCliente,rows.cpPaypalCliente,rows.ciudadClientePaypal,rows.estadoPaypalCliente,rows.metodoPago, rows.statusPago,rows.subtotalTransaccion,rows.montoTransaccion,rows.monedaTransaccion])
+            return([rows.idPago,rows.fechaPago,rows.carrito ,rows.idPaypalCliente ,rows.nombrePaypalCliente,rows.apellidosPaypalCliente,rows.correoPaypalCliente,rows.direccion1PaypalCliente + " " + rows.direccion2PaypalCliente,rows.cpPaypalCliente,rows.ciudadClientePaypal,rows.estadoPaypalCliente,rows.metodoPago, rows.statusPago,rows.subtotalTransaccion,rows.montoTransaccion,rows.monedaTransaccion])
           })
         const data2 = this.state.cardpay.map(rows=>{
-        return([rows.ids,rows.noFactura,rows.nombrecliente,rows.apellidosCliente,rows.rfcCliente,rows.razonSocialCliente,rows.telefonoCliente,rows.correoCliente,rows.paquete])
+        return([rows.noFactura,rows.nombrecliente,rows.apellidosCliente,rows.rfcCliente,rows.razonSocialCliente,rows.telefonoCliente,rows.correoCliente,rows.paquete])
         })  
 
         let datosEmpleados;
@@ -140,16 +137,9 @@ class  Facturacion extends Component {
           
         return(
            
-             <MDBContainer style={{paddingTop:20}}>
-                <CardActionArea>
-        
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    <h5><i>Datos de facturacion de licencias vendidas por paypal</i></h5>    
-                    </Typography>
-                </CardContent>
-                </CardActionArea>
-               
+             <div>
+                <Navbar/>
+                <div style={{width:"90%",marginLeft:"8%",marginTop:"2%"}}>
                 <MUIDataTable
                 title={`Datos del cliente para Diagnóstico035`}
                 data={data2}
@@ -165,7 +155,8 @@ class  Facturacion extends Component {
                 /> 
                 <br/>
                 <br/>
-                </MDBContainer>
+                </div>
+                </div>
 
         )
     }

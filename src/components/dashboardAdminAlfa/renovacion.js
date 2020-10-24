@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead,MDBContainer,MDBCard,MDBCardBody  } from 'mdbreact';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios'
 import {API} from '../utils/http'
 import MUIDataTable from "mui-datatables";
-import { DialogUtility } from '@syncfusion/ej2-popups';
-
+import Navbar from './Navbar'
 
 class  Facturacion extends Component {
     constructor(props){
@@ -135,15 +128,9 @@ class  Facturacion extends Component {
           
         return(
            
-             <MDBContainer style={{paddingTop:20}}>
-                <CardActionArea>
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    <h5><i>Datos de las renovaciones de licencias vendidas por paypal</i></h5>    
-                    </Typography>
-                </CardContent>
-                </CardActionArea>
-            
+             <div>
+               <Navbar/>
+               <div style={{width:"90%",marginLeft:"8%",marginTop:"2%"}}>
                 <MUIDataTable
                 title={`Datos del cliente en la plataforma paypal`}
                 data={data}
@@ -152,7 +139,8 @@ class  Facturacion extends Component {
                 /> 
                 <br/>
                 <br/>
-                </MDBContainer>
+                </div>
+                </div>
 
         )
     }

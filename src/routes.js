@@ -24,6 +24,8 @@ import React, { Component } from 'react';
  import Promocion from './components/dashboardAdminAlfa/promocion';
  import Sistemas from './components/dashboardAdminAlfa/sistemas';
  import Validacion from './components/views/SignUp/validation';
+ import EliminarEval from './components/dashboardAdminAlfa/eliminarEvaluacion';
+ import ValidacionEval from './components/dashboardAdminAlfa/validacionEval';
 
 
 class Routes extends Component{
@@ -56,6 +58,10 @@ class Routes extends Component{
                   <PrivateRoute exact path='/promociones' component={Promocion}/>
                   <PrivateRoute exact path='/usuariosDiagnostico' component={Sistemas}/>
                   <PrivateRoute exact path='/validacion' component={Validacion}/>
+                  <PrivateRoute exact path='/eliminarEval' component={EliminarEval}/>
+                  <PrivateRoute exact path='/validacionEval' component={ValidacionEval}/>
+
+
 
               </main>
               </Switch>

@@ -23,6 +23,7 @@ import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
 import AutorenewOutlinedIcon from '@material-ui/icons/AutorenewOutlined';
 import RedeemOutlinedIcon from '@material-ui/icons/RedeemOutlined';
 import DesktopMacIcon from '@material-ui/icons/DesktopMac';
+import ClearIcon from '@material-ui/icons/Clear';
 
 const drawerWidth = 340;
 
@@ -130,6 +131,16 @@ export default function MiniDrawer() {
           {['Registrar paquetes'].map((text) => (
             <ListItem button key={text} >
               <ListItemIcon> <LibraryAddOutlinedIcon /> </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>    
+        </Link>
+        <Link to="/validacionEval" style={{ textDecoration: 'none' }}>
+        <List >
+          {['Eliminar evaluaciones'].map((text) => (
+            <ListItem button key={text} >
+              <ListItemIcon> <ClearIcon /> </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

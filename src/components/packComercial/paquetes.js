@@ -337,9 +337,7 @@ class Comprar extends Component {
             <div>
               <Navbar/>
                 <div  style={{marginTop:"2%"}}  >
-                    <MDBRow >
-                       
-                        <MDBCol md="10">
+                    <MDBRow >                        <MDBCol md="10">
                         <MDBCard narrow style={{width:"100%",heigth:"60%"}}  >
                             <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-3 mx-5 mb-4">
                             <h6 className="mt-2"><strong>Datos del cliente</strong></h6>

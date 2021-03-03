@@ -111,7 +111,7 @@ componentWillMount(){
         <React.Fragment>
                  <div> 
                  <Navbar prop={nombreAdministrador}/>
-                 <div  style={{width:1000,marginLeft:"15%",marginTop:"2%",marginBottom:"2%"}} >
+                 <div  style={{width:1100,marginLeft:"12%",marginTop:"2%",marginBottom:"2%"}} >
                   <MDBRow> 
                   <MDBCol>                     
                   </MDBCol>

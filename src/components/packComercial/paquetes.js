@@ -337,18 +337,64 @@ class Comprar extends Component {
             <div>
               <Navbar/>
                 <div  style={{marginTop:"2%"}}  >
-                    <MDBRow >                        <MDBCol md="10">
-                        <MDBCard narrow style={{width:"100%",heigth:"60%"}}  >
-                            <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-3 mx-5 mb-4">
+                    <MDBRow >                        
+                      <MDBCol md="10">
+                        <MDBCard narrow style={{width:"100%"}}  >
+                            <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-3 mx-5 ">
                             <h6 className="mt-2"><strong>Datos del cliente</strong></h6>
                             </MDBCardHeader>
-                            <MDBCardBody>
+                            <MDBCardBody style={{marginLeft:50}}>
                             <form
                             class="needs-validation"
                             onSubmit={this.submitHandler}
                             noValidate
                             >
                             <MDBRow>
+                                
+                                <MDBCol md="3" class="mb-3">
+                                <label
+                                    htmlFor="rfc"
+                                    class="grey-text"
+                                >
+                                    RFC
+                                </label>
+                                <input
+                                    value={this.state.rfc}
+                                    onChange={this.changeHandler}
+                                    type="text"
+                                    id="rfc"
+                                    class="form-control"
+                                    name="rfc"
+                                    placeholder="RFC"
+                                    required
+                                />
+                                <div class="invalid-feedback">
+                                    !Requerido
+                                </div>
+                                <div class="valid-feedback">correcto</div>
+                                </MDBCol>
+                           
+                               <MDBCol md="3" class="mb-3">
+                                <label
+                                    htmlFor="razonS"
+                                    class="grey-text"
+                                >
+                                    Razón social
+                                </label>
+                                <input
+                                    value={this.state.razonS}
+                                    onChange={this.changeHandler}
+                                    type="razonS"
+                                    id="razonS"
+                                    class="form-control"
+                                    name="razonS"
+                                    placeholder="Razón social"
+                                    required
+                                />
+                              
+                                </MDBCol>
+                                </MDBRow>
+                                <MDBRow>
                                 <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="nombre"
@@ -395,51 +441,6 @@ class Comprar extends Component {
                                 </MDBCol>
                                 <MDBCol md="3" class="mb-3">
                                 <label
-                                    htmlFor="rfc"
-                                    class="grey-text"
-                                >
-                                    RFC
-                                </label>
-                                <input
-                                    value={this.state.rfc}
-                                    onChange={this.changeHandler}
-                                    type="text"
-                                    id="rfc"
-                                    class="form-control"
-                                    name="rfc"
-                                    placeholder="RFC"
-                                    required
-                                />
-                                <div class="invalid-feedback">
-                                    !Requerido
-                                </div>
-                                <div class="valid-feedback">correcto</div>
-                                </MDBCol>
-                           
-                               <MDBCol md="3" class="mb-3">
-                                <label
-                                    htmlFor="razonS"
-                                    class="grey-text"
-                                >
-                                    Razón social
-                                </label>
-                                <input
-                                    value={this.state.razonS}
-                                    onChange={this.changeHandler}
-                                    type="razonS"
-                                    id="razonS"
-                                    class="form-control"
-                                    name="razonS"
-                                    placeholder="Razón social"
-                                    required
-                                />
-                              
-                                </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
-                            
-                                <MDBCol md="3" class="mb-3">
-                                <label
                                     htmlFor="telefono"
                                     class="grey-text"
                                 >
@@ -459,7 +460,11 @@ class Comprar extends Component {
                                     !Requerido
                                 </div>
                                 </MDBCol>
-                                <MDBCol md="3" className="mb-3">
+                               
+                            </MDBRow> 
+
+                            <MDBRow>
+                            <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="correo"
                                     class="grey-text"
@@ -512,8 +517,8 @@ class Comprar extends Component {
                                 /> 
                                   </MDBCol>  
                                                    
-                            </MDBRow> 
-                            <MDBCardHeader className="view view-cascade gradient-card-header  d-flex justify-content-between align-items-center py-2 mx-4 mb-3">
+                            </MDBRow>
+                            <MDBCardHeader className="view view-cascade gradient-card-header  d-flex justify-content-between align-items-center py-2 mx-4 mb-1">
                             <a href="#" className="black-text mx-3">Seleccione su paquete</a>
                             </MDBCardHeader>  
                             <div class="form-row align-items-right">
@@ -594,7 +599,7 @@ class Comprar extends Component {
                                     {validacion}
                                  </div>   
                                  <div style={{marginTop:"2%",marginLeft:"10%"}} >
-                                   <MDBBtn color="success" type="submit" size="md" >
+                                   <MDBBtn color="success" type="submit" size="md" className="mb-3" >
                                             Registrar
                                   </MDBBtn>
                                   </div>          

@@ -16,15 +16,22 @@ import ListItemText from '@material-ui/core/ListItemText';
 // import MailIcon from '@material-ui/icons/Mail';
 import {Link} from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
-import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
-import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined';
-import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
-import AutorenewOutlinedIcon from '@material-ui/icons/AutorenewOutlined';
-import RedeemOutlinedIcon from '@material-ui/icons/RedeemOutlined';
-import DesktopMacIcon from '@material-ui/icons/DesktopMac';
-import ClearIcon from '@material-ui/icons/Clear';
-
+// import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
+// import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
+// import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined';
+// import LocalAtmOutlinedIcon from '@material-ui/icons/LocalAtmOutlined';
+// import AutorenewOutlinedIcon from '@material-ui/icons/AutorenewOutlined';
+// import RedeemOutlinedIcon from '@material-ui/icons/RedeemOutlined';
+// import DesktopMacIcon from '@material-ui/icons/DesktopMac';
+// import ClearIcon from '@material-ui/icons/Clear';
+// import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+import image from '../images/delete.svg';
+import monitor from '../images/monitor.svg';
+import renovation from '../images/renovation.svg';
+import admin from '../images/admin.svg'
+import card from '../images/card.svg'
+import exit from '../images/exit.svg'
+import user from '../images/user.svg'
 const drawerWidth = 340;
 
 const useStyles = makeStyles((theme) => ({
@@ -80,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
@@ -100,7 +106,7 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
- 
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -126,73 +132,73 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <Link to="/paquetes" style={{ textDecoration: 'none' }}>
+        <Link to="/paquetes" style={{ textDecoration: 'none', color: 'blue' }}>
         <List >
           {['Registrar paquetes'].map((text) => (
             <ListItem button key={text} >
-              <ListItemIcon> <LibraryAddOutlinedIcon /> </ListItemIcon>
+              <ListItemIcon><img width="24" heigth= "24"src = {user}></img></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>    
         </Link>
-        <Link to="/validacionEval" style={{ textDecoration: 'none' }}>
+
+        <Link to="/renovacionLicencias" style={{ textDecoration: 'none', color: 'blue' }}>
+        <List >
+          {['Renovacion de Licencias'].map((text) => (
+            <ListItem button key={text} >
+              <ListItemIcon><img src = {renovation} width="30" heigth= "30" /></ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>    
+        </Link>
+
+        <Link to="/usuariosDiagnostico" style={{ textDecoration: 'none', color: 'blue' }}>
+        <List >
+          {['Clientes Diagnostico035'].map((text) => (
+            <ListItem button key={text} >
+              <ListItemIcon><img width="24" heigth= "24" src = {monitor}/></ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>    
+        </Link>
+
+        <Link to="/validacionEval" style={{ textDecoration: 'none', color: 'blue' }}>
         <List >
           {['Eliminar evaluaciones'].map((text) => (
             <ListItem button key={text} >
-              <ListItemIcon> <ClearIcon /> </ListItemIcon>
+              <ListItemIcon><img width="24" heigth= "24"src = {image}></img></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>    
         </Link>
 
-        <Link to="/usuariosDiagnostico" style={{ textDecoration: 'none' }}>
+        <Link to="/validacion" style={{ textDecoration: 'none', color: 'blue' }}>
         <List >
-          {['Sistemas existentes funcionando'].map((text) => (
+          {['Registrar admin. ADS'].map((text) => (
             <ListItem button key={text} >
-              <ListItemIcon> <DesktopMacIcon /> </ListItemIcon>
+              <ListItemIcon><img src = {admin} width="24" heigth= "24" /></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>    
         </Link>
-
-
-        <Link to="/validacion" style={{ textDecoration: 'none' }}>
-        <List >
-          {['Registrar admin. ALFA'].map((text) => (
-            <ListItem button key={text} >
-              <ListItemIcon> <PeopleOutlinedIcon /> </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>    
-        </Link>
-        <Link to="/facturacion" style={{ textDecoration: 'none' }}>
-        <List >
-          {['Facturación pendiente'].map((text) => (
-            <ListItem button key={text} >
-              <ListItemIcon> <RateReviewOutlinedIcon /> </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>    
-        </Link>
-    
-        <Link to="/facturacionRealizada" style={{ textDecoration: 'none' }}>
-        <List >
-          {['Sistemas vendidos por paypal'].map((text) => (
-            <ListItem button key={text} >
-              <ListItemIcon> <LocalAtmOutlinedIcon  /> </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>    
-        </Link>
+        
         <Divider />        
- 
-        <Link to="/renovacion" style={{ textDecoration: 'none' }}>
+        <Link to="" style={{ textDecoration: 'none', color: 'blue' }}>
+        <List >
+          {['Pagos tarjeta (pendiente)'].map((text) => (
+            <ListItem button key={text} >
+              <ListItemIcon><img src = {card} width="24" heigth= "24" /></ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>    
+        </Link>
+        {/* <Link to="/renovacion" style={{ textDecoration: 'none' }}>
         <List >
           {['Renovaciones'].map((text) => (
             <ListItem button key={text} >
@@ -211,16 +217,18 @@ export default function MiniDrawer() {
             </ListItem>
           ))}
         </List>    
-        </Link>
+        </Link> */}
 
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/" style={{ textDecoration: 'none', color: 'blue' }}>
         <List >
-          {['Cerrar sesión'].map((text) => (
-            <ListItem button key={text} >
-              <ListItemIcon> <ExitToAppIcon  /> </ListItemIcon>
+          {['Cerrar sesión'].map((text) => {
+            return(
+              <ListItem button key={text} >
+              <ListItemIcon><img src = {exit} width="24" heigth= "24" /></ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
-          ))}
+            )
+          })}
         </List>    
         </Link>
       </Drawer>

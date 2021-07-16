@@ -4,6 +4,9 @@ import axios from 'axios'
 import {API} from '../utils/http'
 import MUIDataTable from "mui-datatables";
 import Navbar from './Navbar'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { Modal } from 'react-bootstrap';
+import { Card } from 'antd';
 
 
 class  Facturacion extends Component {
@@ -11,8 +14,11 @@ class  Facturacion extends Component {
         super(props)
         this.state = {
             cardpay:[],
-            modal: false
+            modal: false,
+            show:false,
+            array:[],
         }
+        this.handleClose = this.handleClose.bind(this)
     }
 
     async componentWillMount(){
@@ -50,22 +56,105 @@ class  Facturacion extends Component {
         })
     }
 
+    
+    handleClose(){
+      this.setState({show:false})
+    }
     toggle = () => {
         this.setState({
           modal: !this.state.modal
         });
       }
+      getMuiTheme = () => createMuiTheme({
+        overrides: {
+          MUIDataTableHeadCell: {
+            root: {
+              '&:nth-child(2)': {
+                width: 20
+              }
+            }
+          }
+        }
+      })
+      handleShow(id,idUsuario,correo,fecha){
+        id = parseInt(id) 
+        let array = []
+        if(id===1){
+            array.push(["1","1","15",idUsuario,correo,fecha])
+            this.setState({array:array})
+        }else if(id===2){
+            
+            array.push(["1","1","50",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===3){
+            array.push(["1","1","100",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===4){
+            array.push(["1","1","200",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===5){
+            array.push(["3","3","15",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===6){
+            array.push(["3","3","50",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===7){
+            array.push(["3","3","100",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===8){
+            array.push(["3","3","200",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===9){
+            array.push(["5","5","15",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===10){
+            array.push(["5","5","50",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===11){
+            array.push(["5","5","100",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===12){
+            array.push(["5","5","200",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===13){
+            array.push(["10","10","15",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===14){
+            array.push(["10","10","50",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===15){
+            array.push(["10","10","100",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===16){
+            array.push(["10","10","200",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===17){
+            array.push(["20","20","15",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===18){
+            array.push(["20","20","50",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===19){
+            array.push(["20","20","100",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }else if(id===20){
+            array.push(["20","20","200",idUsuario,correo,fecha])
+            this.setState({array:array[0]})
+        }
+        this.setState({show:true})
+    }  
     render(){
 
-        const columns = ["id","Nombre" , "Apellidos","RFC", "Razón social",  "Teléfono","Correo","Adquirido","Paquete"]
+        const columns = ["id","Nombre","RFC", "Razón social","Correo","Adquirido","Paquete"]
         let data; 
         if(this.state.cardpay[0]){
             
             var fecha;
             data= this.state.cardpay[0].map(rows=>{
-                fecha=rows.fechaRegistro.substring(4,22)
+                let botonPaquete = <button type="button" class="btn btn-secondary btn-circle btn-lg" onClick={e=>this.handleShow(rows.fk_paquetes,rows.id,rows.correo,rows.fechaRegistro)}>{rows.fk_paquetes}  </button>
+                fecha=rows.fechaRegistro.substring(4,16)
                 console.log("rows", this.state.cardpay[0])
-                return([rows.id,rows.nombre,rows.apellidos,rows.RFC,rows.RazonSocial ,rows.telefono ,rows.correo,fecha + " hrs.",rows.fk_paquetes])
+                return([rows.id,rows.nombre + " " + rows.apellidos,rows.RFC,rows.RazonSocial,rows.correo,fecha,botonPaquete])
               })    
         }
      
@@ -74,6 +163,7 @@ class  Facturacion extends Component {
         const options = {
             filterType: "dropdown",
             responsive: "stacked",
+            elevation:0,
             textLabels: {
                        body: {
                          noMatch: "Consultando información",
@@ -114,158 +204,60 @@ class  Facturacion extends Component {
             },
             onFilterChange: (action, filtroTable) => {
               filtro=filtroTable
-              }     };
+              }     
+        };
    
         return(
            <React.Fragment>
              <Navbar/>
-             <div style={{width:"90%",marginLeft:"8%",marginTop:"2%"}}>
-                <MDBBtn color="secondary"  size="md"style={{marginLeft:"80%",marginBottom:"2%"}} onClick={this.toggle}>Ver paquetes</MDBBtn>
+             <div style={{width:"80%",marginLeft:"13%",marginTop:"1%"}}>
+                <Card title="Listado de clientes en la BD">
+                <MuiThemeProvider theme={this.getMuiTheme()}>
                 <MUIDataTable
-                title={`Clientes existentes utilizando Diagnóstico035`}
+                title={`Cientes registrados en Diagnóstico035`}
                 data={data}
                 columns={columns}
                 options={options}
                 /> 
-                <br/>
-                <br/>
+                </MuiThemeProvider>
+                </Card>
             </div>
-            <MDBContainer>
-            <MDBModal isOpen={this.state.modal} toggle={this.toggle}>
-              <MDBModalHeader toggle={this.toggle}>Paquetes existentes</MDBModalHeader>
-              <MDBModalBody>                
-                <table class="table table-striped">
-                <thead>
-                  <tr>
-                  <th>Id</th>
-                    <th>RFC</th>
-                    <th>Empresas</th>
-                    <th>Empleados</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>50</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>100</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>200</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>50</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>100</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>200</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">9</th>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">10</th>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>50</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">11</th>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>100</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">12</th>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>200</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">13</th>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">14</th>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>50</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">16</th>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>100</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">17</th>
-                    <td>20</td>
-                    <td>20</td>
-                    <td>15</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">18</th>
-                    <td>20</td>
-                    <td>20</td>
-                    <td>50</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">19</th>
-                    <td>20</td>
-                    <td>20</td>
-                    <td>100</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">20</th>
-                    <td>20</td>
-                    <td>20</td>
-                    <td>200</td>
-                  </tr>
-                </tbody>
-              </table>
-              </MDBModalBody>
-              <MDBModalFooter>
-                <MDBBtn color="success" size="md"onClick={this.toggle}>Cerrar</MDBBtn>
-              </MDBModalFooter>
-            </MDBModal>
-          </MDBContainer>
+          
+          <Modal  size="lg" show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Datos del paquete</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Empresas</th>
+                        <th scope="col">RFC</th>
+                        <th scope="col">Empleados</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Fecha de registro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">{this.state.array[3]}</th>
+                        <td>{this.state.array[0]}</td>
+                        <td>{this.state.array[1]}</td>
+                        <td>{this.state.array[2]}</td>
+                        <td>{this.state.array[4]}</td>
+                        <td>{this.state.array[5]}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                     
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <MDBBtn color="danger" size = "md"onClick={this.handleClose}>
+                        Cerrar
+                    </MDBBtn>
+                    </Modal.Footer>
+             </Modal>
           </React.Fragment>
         )
     }

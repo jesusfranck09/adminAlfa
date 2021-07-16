@@ -37,7 +37,8 @@ import {
           return (
             <React.Fragment>
             <Navbar/>    
-            <div style={{marginLeft:"20%",marginTop:"2%"}}>
+            <div style={{marginTop:"2%"}}>
+             <center>   
              <Form
                     onSubmit={onSubmit}
                     render={({ handleSubmit, submitting,values }) => (
@@ -49,7 +50,7 @@ import {
                           </MDBCardHeader>
                           <MDBCardBody>
                           <Grid container alignItems="flex-start" spacing={2} >
-                            <Grid item xs={8}>
+                            <Grid item xs={12}>
                               <Field
                                 fullWidth
                                 required
@@ -59,9 +60,8 @@ import {
                                 label="Clave de acceso"
                               />
                             </Grid>                              
-                              <center>
                               <MDBBtn
-
+                                style={{marginTop:"10%", marginLeft:"22%"}}
                                 color="danger"
                                 size="md"
                                 type="submit"
@@ -70,7 +70,6 @@ import {
                               >
                                 Ingresar 
                               </MDBBtn>
-                              </center>
                           </Grid>
                           </MDBCardBody>
                           <MDBCardFooter>
@@ -81,6 +80,7 @@ import {
                       </form>
                     )}
                   />
+                </center>  
                   </div>
             </React.Fragment>
           );

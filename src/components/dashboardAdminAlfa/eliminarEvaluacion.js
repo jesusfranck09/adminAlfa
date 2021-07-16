@@ -8,6 +8,8 @@ import {API} from '../utils/http'
 import { DialogUtility } from '@syncfusion/ej2-popups';
 import Navbar from '../dashboardAdminAlfa/Navbar'
 import MUIDataTable from "mui-datatables";
+import { Card } from 'antd';
+
 
 class Eliminar extends Component {
     constructor(props){
@@ -80,7 +82,6 @@ class Eliminar extends Component {
       };
 
       avanzar(id,periodo){
-
         if(this.state.eval && id && periodo ) {
             axios({
                 url:  API,
@@ -124,7 +125,7 @@ class Eliminar extends Component {
         console.log(this.state.eval)
       };
     render(){
-        const columns = ["ID","Nombre", "Correo", "Periodo" ,  "Evaluacion ATS","Evaluacion RP","Evaluacion EEO", `Eliminar respuestas`];
+        const columns = ["ID","Nombre", "Correo","Periodo","Evaluacion ATS","Evaluacion RP","Evaluacion EEO", `Eliminar`];
         let atsContestado;
         let rpContestado;
         let eeoContestado;
@@ -145,7 +146,7 @@ class Eliminar extends Component {
             }else  if(rows.EEOContestado == 'false'){
                 eeoContestado = 'No Realizada' 
             }
-          let boton = <div><MDBBtn size="md" color="danger" onClick={(e) => { if (window.confirm('¿Desea remover la evaluación?, las respuestas no se podrán recuperar')) this.avanzar(rows.id,rows.periodo)}}>Eliminar  <strong>{this.state.eval} </strong></MDBBtn></div>
+          let boton = <div><MDBBtn size="md" outline color="danger" onClick={(e) => { if (window.confirm('¿Desea remover la evaluación?, las respuestas no se podrán recuperar')) this.avanzar(rows.id,rows.periodo)}}>Eliminar  <strong>{this.state.eval} </strong></MDBBtn></div>
           return([ rows.id  , rows.nombre + " " + rows.ApellidoP  , rows.correo , rows.periodo ,atsContestado , rpContestado , eeoContestado,boton])
         })
 
@@ -153,7 +154,8 @@ class Eliminar extends Component {
         let filtro;
         const options = {
             filterType: "dropdown",
-            responsive: "stacked",
+            responsive: "responsive",
+            elevation:0,
             textLabels: {
                        body: {
                          noMatch: "Lo Siento ,No se han encontrado Resultados :(",
@@ -197,45 +199,43 @@ class Eliminar extends Component {
               filtro=filtroTable
               console.log("filtro" , filtro) 
               }     };
+              let title = <strong>Lista de evaluaciones realizadas</strong>;
         return(
             <div>
               <Navbar/>
-                <div  style={{marginTop:"2%",width:"85%" , marginLeft:"10%"}}  >
-    
-                            <form
-                            onSubmit={this.submitHandler}
-                            noValidate
-                            >
-                            <div>
-                               
-                            <label
-                                    htmlFor="idEmpleado"
-                                    class="black-text"
-                                >
-                                   <strong>Seleccione su evaluación</strong>
-                            </label>
-                            
-                                    <div class="col-auto my-1 mb-2"></div>
-                                    <select value={this.state.eval}  onChange={this.changeHandler}  class="custom-select mr-md-1" name="eval">
-                                        <option value="selection">-- Seleccione una opción --</option>
-                                        <option value="ATS">ATS</option>
-                                        <option value="RP">RP</option>
-                                        <option value="EEO">EEO</option>
-                                    </select>
-                                  </div>
-                                 
-                            </form>
-                              
-                       
-                    </div>
-                    <div style={{marginTop:"2%",width:"85%" , marginLeft:"10%"}}>      
-                            <MUIDataTable
-                            title={`Tabla de Movimientos`}
-                            data={data}
-                            columns={columns}
-                            options={options}
-                            />
-                     </div> 
+                <div  style={{width:"85%", marginLeft:"10%", marginTop:"1%"}}  >
+                <Card title = {title}>
+                <div>      
+                      <form
+                      onSubmit={this.submitHandler}
+                      noValidate
+                      style= {{marginBottom:"2%"}}
+                      >
+                      <div>
+                      <label
+                              htmlFor="idEmpleado"
+                              class="black-text"
+                          >
+                      </label>
+                              <div class="col-auto my-1 mb-2"></div>
+                              <select value={this.state.eval}  onChange={this.changeHandler}  class="custom-select mr-md-1" name="eval">
+                                  <option value="selection">Seleccione una opción</option>
+                                  <option value="ATS">ATS</option>
+                                  <option value="RP">RP</option>
+                                  <option value="EEO">EEO</option>
+                              </select>
+                            </div>
+                      </form>
+                      <MUIDataTable
+                      title={`Tabla de Movimientos`}
+                      data={data}
+                      columns={columns}
+                      options={options}
+                      />
+                </div>        
+              </Card>         
+              </div>
+                   
             </div>
         )
     }

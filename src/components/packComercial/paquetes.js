@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
-import { MDBBtn, MDBCard, MDBCardBody,MDBCol, MDBCardHeader,MDBRow } from 'mdbreact';
-import Button from '@material-ui/core/Button';
+import { MDBBtn,MDBCol,MDBRow } from 'mdbreact';
+// import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -12,7 +12,9 @@ import Slide from '@material-ui/core/Slide';
 import  axios from 'axios'
 import {API} from '../utils/http'
 import { DialogUtility } from '@syncfusion/ej2-popups';
-import Navbar from '../dashboardAdminAlfa/Navbar'
+import Navbar from '../dashboardAdminAlfa/Navbar';
+import { Card,Button,Modal } from 'antd';
+
 
 class Comprar extends Component {
     constructor(props){
@@ -28,7 +30,8 @@ class Comprar extends Component {
             rfcSelect:"",
             open:false,
             success:false,
-            isPasswordShown: false
+            isPasswordShown: false,
+            isModalVisible:false
 
         }
         this.avanzar= this.avanzar.bind(this)
@@ -71,9 +74,7 @@ class Comprar extends Component {
       var telefono = this.state.telefono;
       var correo = this.state.correo;
       var contraseña = this.state.contraseña;
-      var rfcSelct = this.state.rfcSelect
-      console.log("datos",nombre,apellidos,rfc,razonS,telefono,correo,contraseña,rfcSelct)
-      
+      var rfcSelct = this.state.rfcSelect      
       if(nombre && apellidos && rfc && razonS && telefono && correo && contraseña && rfcSelct && rfcSelct !="Ya seleccionado"){
         function ValidateEmail(sEmail) {
             var reEmail = /^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
@@ -251,11 +252,23 @@ class Comprar extends Component {
             console.log("error" , err)
         })       
       }
-    
- 
-      changeHandler = event => {
-        this.setState({ [event.target.name]: event.target.value });
-      };
+
+    changeHandler = event => {
+      this.setState({ [event.target.name]: event.target.value });
+    };
+
+    showModal = () => {
+      this.setState({isModalVisible:true})
+    };
+  
+    handleOk = () => {
+      this.setState({isModalVisible:false})
+    };
+  
+     handleCancel = () => {
+      this.setState({isModalVisible:false})
+    };
+  
     render(){
       const { isPasswordShown } = this.state;
 
@@ -332,25 +345,23 @@ class Comprar extends Component {
              !Requerido
             </div>
           }
-        
+        let title = <p><strong>Registro de paquetes</strong></p>
         return(
+          <React.Fragment>
             <div>
               <Navbar/>
-                <div  style={{marginTop:"2%"}}  >
+                <div  style={{marginTop:"1%", width:1100}}  >
+               
                     <MDBRow >                        
-                      <MDBCol md="10">
-                        <MDBCard narrow style={{width:"100%"}}  >
-                            <MDBCardHeader className="view view-cascade gradient-card-header blue-gradient d-flex justify-content-between align-items-center py-3 mx-5 ">
-                            <h6 className="mt-2"><strong>Datos del cliente</strong></h6>
-                            </MDBCardHeader>
-                            <MDBCardBody style={{marginLeft:50}}>
-                            <form
+                      <MDBCol md="10" >
+                        <Card title={title} style={{marginLeft:"18%",width:1100, marginBottom:"5%"}}>
+                          <form
                             class="needs-validation"
                             onSubmit={this.submitHandler}
                             noValidate
                             >
+                            <Card type="inner" title="Formulario de registro" extra={<Button type="dashed"  onClick={this.showModal}danger>Más informacón</Button>}>
                             <MDBRow>
-                                
                                 <MDBCol md="3" class="mb-3">
                                 <label
                                     htmlFor="rfc"
@@ -391,10 +402,7 @@ class Comprar extends Component {
                                     placeholder="Razón social"
                                     required
                                 />
-                              
                                 </MDBCol>
-                                </MDBRow>
-                                <MDBRow>
                                 <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="nombre"
@@ -460,10 +468,6 @@ class Comprar extends Component {
                                     !Requerido
                                 </div>
                                 </MDBCol>
-                               
-                            </MDBRow> 
-
-                            <MDBRow>
                             <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="correo"
@@ -485,7 +489,6 @@ class Comprar extends Component {
                                     !Requerido
                                 </div>
                                 </MDBCol>
-                               
                                 <MDBCol md="3" className="mb-3">
                                 <label
                                     htmlFor="contraseña"
@@ -503,12 +506,10 @@ class Comprar extends Component {
                                     placeholder="Contraseña"
                                     required
                                 />
-                               
                                 <div class="invalid-feedback">
                                    !Requerido
                                 </div>
                                 <div class="valid-feedback">verificado</div>
-                                  
                                 </MDBCol> 
                                 <MDBCol  md="3" style={{marginTop:"3%"}}>
                                 <i
@@ -516,14 +517,15 @@ class Comprar extends Component {
                                   onClick={this.togglePasswordVisiblity}
                                 /> 
                                   </MDBCol>  
-                                                   
                             </MDBRow>
-                            <MDBCardHeader className="view view-cascade gradient-card-header  d-flex justify-content-between align-items-center py-2 mx-4 mb-1">
-                            <a href="#" className="black-text mx-3">Seleccione su paquete</a>
-                            </MDBCardHeader>  
-                            <div class="form-row align-items-right">
-                                    <div class="col-auto my-1">
-                                    <label class="mr-sm-2" for="inlineFormCustomSelect">1 RFC</label>
+                            </Card>
+                            <Card
+                            type="inner"
+                            title="Seleccione su paquete"
+                            >
+                                   <MDBRow > 
+                                   <MDBCol  md="4">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect"><strong> RFC </strong></label>
                                     <select value={this.state.rfcSelect} required onChange={this.changeHandler}  class="custom-select mr-sm-1" name="rfcSelect">
                                         {selected}
                                         <option value="1rfc1">de 1 a 15 empleados</option>
@@ -536,9 +538,9 @@ class Comprar extends Component {
 
                                     </select>
                                     {validacion}
-                                    </div>
-                                    <div class="col-auto my-1">
-                                    <label class="mr-sm-2" for="inlineFormCustomSelect">3 RFC</label>
+                                   </MDBCol>
+                                   <MDBCol  md="4">
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect"><strong>3 RFC </strong></label>
                                     <select  value={this.state.rfcSelect} required onChange={this.changeHandler} class="custom-select mr-sm-1" name="rfcSelect">
                                     {selected}
                                         <option value="3rfc1">de 1 a 15 empleados</option>
@@ -548,12 +550,11 @@ class Comprar extends Component {
                                         <option value="3rfc5">de 201 a 300 empleados</option>
                                         <option value="3rfc6">de 301 a 400 empleados</option>
                                         <option value="3rfc7">de 401 a 500 empleados</option>
-
                                     </select>
                                     {validacion}
-                                    </div>
-                                    <div class="col-auto my-1">
-                                    <label class="mr-sm-2" for="inlineFormCustomSelect">5 RFC</label>
+                                    </MDBCol>
+                                    <MDBCol  md="4" dd>
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect"> <strong>5 RFC </strong></label>
                                     <select value={this.state.rfcSelect} required onChange={this.changeHandler} class="custom-select mr-sm-1" name="rfcSelect">
                                     {selected}
                                         <option value="5rfc1">de 1 a 15 empleados</option>
@@ -563,12 +564,13 @@ class Comprar extends Component {
                                         <option value="5rfc5">de 201 a 300 empleados</option>
                                         <option value="5rfc6">de 301 a 400 empleados</option>
                                         <option value="5rfc7">de 401 a 500 empleados</option>
-
                                     </select>
                                     {validacion}
-                                    </div>
-                                    <div class="col-auto my-1">
-                                    <label class="mr-sm-2" for="inlineFormCustomSelect">10 RFC</label>
+                                    </MDBCol>
+                                    </MDBRow>
+                                    <MDBRow>
+                                    <MDBCol  md="4" style={{marginTop:"1%"}}>
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect"> <strong> 10 RFC </strong></label>
                                     <select value={this.state.rfcSelect} required onChange={this.changeHandler} class="custom-select mr-sm-1" name="rfcSelect">
                                     {selected}
                                         <option value="10rfc1">de 1 a 15 empleados</option>
@@ -578,12 +580,11 @@ class Comprar extends Component {
                                         <option value="10rfc5">de 201 a 300 empleados</option>
                                         <option value="10rfc6">de 301 a 400 empleados</option>
                                         <option value="10rfc7">de 401 a 500 empleados</option>
-
                                     </select>
                                     {validacion}
-                                    </div>
-                                    <div class="col-auto my-1">
-                                    <label class="mr-sm-2" for="inlineFormCustomSelect">20 RFC</label>
+                                    </MDBCol>
+                                    <MDBCol  md="4" style={{marginTop:"1%"}}>
+                                    <label class="mr-sm-2" for="inlineFormCustomSelect"><strong> 20 RFC </strong></label>
                                     <select value={this.state.rfcSelect} required onChange={this.changeHandler} class="custom-select mr-sm-1" name="rfcSelect">
                                     {selected}
                                         <option value="20rfc1">de 1 a 15 empleados</option>
@@ -593,28 +594,32 @@ class Comprar extends Component {
                                         <option value="10rfc5">de 201 a 300 empleados</option>
                                         <option value="10rfc6">de 301 a 400 empleados</option>
                                         <option value="10rfc7">de 401 a 500 empleados</option>
-
                                     </select>
-                                  
                                     {validacion}
-                                 </div>   
-                                 <div style={{marginTop:"2%",marginLeft:"10%"}} >
-                                   <MDBBtn color="success" type="submit" size="md" className="mb-3" >
+                                 </MDBCol> 
+                                 <MDBCol  md="4" style={{marginTop:"1%"}} >
+                                   <MDBBtn style={{marginTop:"8%", marginLeft:"60%"}} color="success" outline type="submit" size="md" className="mb-3" >
                                             Registrar
                                   </MDBBtn>
-                                  </div>          
-                                </div>
-                               
-                            </form>
-                           
-                            </MDBCardBody>
-                        </MDBCard>
+                                  </MDBCol>
+                                 </MDBRow>          
+                              </Card>
+                            </form>                
+                        </Card>
                         </MDBCol>
                         </MDBRow>
                         {modal}
                     </div>
                
             </div>
+                     <>
+                    <Modal title="Detalles del registro" visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+                      <p>Los campos RFC y Razón Social deben pertenecer a la empresa.</p>
+                      <p>Las casillas Nombre, Apellidos, Teléfono, Correo y Contraseña deben ser del cliente que adquiere el paquete</p>
+                      <p>Los paquetes están distribuidos de acuerdo al número de empresas por registrar.</p>
+                    </Modal>
+                  </>
+            </React.Fragment>
         )
     }
 }

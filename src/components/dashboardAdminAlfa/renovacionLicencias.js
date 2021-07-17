@@ -686,7 +686,7 @@ class  Renovacion extends Component {
                         <th scope="col">RFC</th>
                         <th scope="col">Empleados</th>
                         <th scope="col">Correo</th>
-                        <th scope="col">Fecha de registro</th>
+                        <th scope="col">Fecha de vencimiento</th>
                         </tr>
                     </thead>
                     <tbody>
